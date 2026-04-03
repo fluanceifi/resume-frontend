@@ -1,0 +1,59 @@
+{
+  "project": "Hybrid RAG Portfolio",
+  "tracks": [
+    {
+      "name": "BM25 Query Strategy",
+      "baseline": 35.0,
+      "improved": 95.0,
+      "note": "35% is BM25 baseline (match content), not a dedup issue.",
+      "conditions": {
+        "model": "n/a",
+        "weights": "n/a",
+        "dedup": "n/a"
+      },
+      "evidence": "../data/bm25_eval_report.md"
+    },
+    {
+      "name": "Hybrid RRF Stability",
+      "baseline": 45.0,
+      "improved": 100.0,
+      "note": "Same 0.7:0.3, dedup off vs on.",
+      "conditions": {
+        "model": "text-embedding-3-large",
+        "weights": "0.7:0.3",
+        "dedup": "off -> on"
+      },
+      "evidence": [
+        "../data/hybrid_eval_b0.7_k0.3_rc20_kc10.md",
+        "../data/hybrid_eval_report_7_3_dedup.md"
+      ]
+    }
+  ],
+  "weight_tuning": [
+    {
+      "model": "text-embedding-3-small",
+      "weights": "85:15",
+      "top1": 100.0,
+      "evidence": [
+        "../data/eval_summary_small_model.md",
+        "../data/eval_report_small_85_15.md"
+      ]
+    },
+    {
+      "model": "text-embedding-3-small",
+      "weights": "0.9:0.1",
+      "top1": 95.0,
+      "evidence": "../data/hybrid_eval_report_9_1_dedup.md"
+    },
+    {
+      "model": "text-embedding-3-large",
+      "weights": "0.7:0.3",
+      "top1": 100.0,
+      "evidence": "../data/hybrid_eval_report_7_3_large.md"
+    }
+  ],
+  "reference": {
+    "title": "I Built a Hybrid Search System That Beats Standard RAG by 35%",
+    "url": "https://medium.com/@hitendra.patel2986/i-built-a-hybrid-search-system-that-beats-standard-rag-by-35-1968791ae539"
+  }
+}

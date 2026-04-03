@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+*.local
+.env.local
+.env.production.local
+.env.development.local
+.idea/
+_legacy/
+profile.png
+.env.development
+
+# Claude Code
+.claude/
+CLAUDE.md
+AGENTS.md
+docs/

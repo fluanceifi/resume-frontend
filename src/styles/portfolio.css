@@ -1,0 +1,374 @@
+/* ── Portfolio Page Styles ────────────────────────────── */
+/* HybridRagPage / SmuClubPage 공통 스타일               */
+/* variables.css 의 CSS 변수를 사용한다                    */
+
+/* ── Code / Pre ──────────────────────────────────────── */
+.document code {
+  padding: 0.06rem 0.34rem;
+  border-radius: 4px;
+  background: #f7f7f7;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.91em;
+  color: #333;
+}
+
+.document pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7f7f7;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+/* ── Document Wrapper ────────────────────────────────── */
+.document {
+  width: min(900px, calc(100vw - 48px));
+  margin: 40px auto 64px;
+}
+
+/* ── Page Block ──────────────────────────────────────── */
+.document .page {
+  position: relative;
+  padding: 44px 0 40px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.document .page:last-child { border-bottom: none; }
+.document .page::before { display: none; }
+
+/* ── Hero ────────────────────────────────────────────── */
+.document .hero { padding-top: 20px; }
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.document .hero h1 {
+  margin: 0;
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+.document .hero p.lead {
+  max-width: 780px;
+  margin: 16px 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── Section Titles ──────────────────────────────────── */
+.document .section-title {
+  margin: 0 0 12px;
+  font-family: "Noto Serif KR", serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.document .section-desc {
+  margin: 0 0 24px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── Meta Grid ───────────────────────────────────────── */
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.meta-card {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.meta-card .label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.meta-card .value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ── Stack Chips ─────────────────────────────────────── */
+.document .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.document .chip {
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ── Summary / Baseline / Improvements Grids ─────────── */
+.baseline-grid,
+.summary-grid,
+.improvements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.summary-card,
+.improvement-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.summary-card h3,
+.improvement-card h3 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.summary-card p,
+.improvement-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.75;
+}
+.summary-card p + p { margin-top: 8px; }
+
+.summary-card ul,
+.improvement-card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+/* ── Metric Line / Badge / Evidence ──────────────────── */
+.metric-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px !important;
+}
+.metric-line strong { font-size: 1rem; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.evidence {
+  margin-top: 10px !important;
+  font-size: 0.78rem !important;
+  color: var(--muted) !important;
+}
+
+/* ── Insight Callout ─────────────────────────────────── */
+.insight-callout {
+  padding: 18px 20px;
+  border-left: 3px solid var(--ink);
+  background: #fafafa;
+  margin-bottom: 24px;
+  border-radius: 0 8px 8px 0;
+}
+.insight-callout h3 { margin: 0 0 8px; font-size: 0.9rem; font-weight: 700; }
+.insight-callout p  { margin: 0; font-size: 0.88rem; color: #555; line-height: 1.75; }
+
+/* ── Diagram Grid ────────────────────────────────────── */
+.diagram-grid { display: grid; gap: 16px; }
+.diagram-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+.diagram-card h3 { margin: 0 0 12px; font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+.diagram-card figure { margin: 0; }
+.diagram-card img {
+  width: 100%; height: auto; display: block;
+  border-radius: 6px; border: 1px solid var(--line); background: #fff;
+}
+.diagram-card figcaption {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Problem Cards ───────────────────────────────────── */
+.problem-list { display: grid; gap: 16px; }
+.problem-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+.problem-card .number {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.problem-card h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.document .subheading {
+  margin: 16px 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.problem-card p { margin: 0; font-size: 0.88rem; color: #555; line-height: 1.75; }
+.problem-card p + p { margin-top: 10px; }
+.problem-card ul { margin-top: 8px; padding-left: 18px; font-size: 0.88rem; color: #555; }
+
+/* ── Table ───────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; margin-top: 0; }
+.document table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+.document thead tr { border-bottom: 2px solid var(--ink); }
+.document th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.document td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  font-size: 0.85rem;
+  color: #444;
+}
+.document td .score { font-weight: 700; color: var(--ink); }
+.document tbody tr:hover td { background: #fafafa; }
+
+/* ── Footer Note ─────────────────────────────────────── */
+.footer-note {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.footer-note strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.footnote { margin-top: 16px; font-size: 0.78rem; color: var(--muted); }
+.tight-list li + li { margin-top: 5px; }
+.refs-list { margin: 0; padding-left: 18px; }
+.refs-list li { overflow-wrap: anywhere; font-size: 0.84rem; }
+
+/* ── Utility ─────────────────────────────────────────── */
+.page-break { break-after: page; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .document { width: calc(100vw - 32px); margin: 24px auto 48px; }
+  .meta-grid { grid-template-columns: 1fr; }
+  .baseline-grid,
+  .summary-grid,
+  .improvements-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Print (Portfolio) ───────────────────────────────── */
+@media print {
+  .document { width: auto; margin: 0; }
+
+  .document .page {
+    padding: 24px 0 20px;
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .document .page + .page { break-before: page; page-break-before: always; }
+
+  .document .hero h1 { font-size: 2rem; }
+  .document .section-title { font-size: 1.3rem; }
+
+  .meta-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .baseline-grid,
+  .summary-grid,
+  .improvements-grid,
+  .diagram-grid { grid-template-columns: 1fr; gap: 8px; }
+
+  .problem-list { gap: 10px; }
+
+  .meta-card, .summary-card, .improvement-card,
+  .diagram-card, .problem-card, .footer-note,
+  .insight-callout, figure, .document pre { break-inside: avoid; page-break-inside: avoid; }
+
+  h1, h2, h3, .document .subheading { break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+
+  .document .stack { gap: 5px; margin-top: 14px; }
+  .document .chip { font-size: 0.76rem; padding: 3px 8px; }
+
+  .diagram-card img { max-height: 110mm; object-fit: contain; }
+  .document pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .document a { text-decoration: none; overflow-wrap: anywhere; }
+  .document table { font-size: 0.78rem; }
+  .document td, .document th { padding: 7px 9px; }
+}
