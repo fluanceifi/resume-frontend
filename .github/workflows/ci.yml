@@ -72,7 +72,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.INFRA_REPO_PAT }}
-          repository: FluanceIFI/resume-infra
+          repository: fluanceifi/resume-infra
           event-type: deploy
           client-payload: |
             {
