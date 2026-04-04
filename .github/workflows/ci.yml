@@ -25,12 +25,36 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build image
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
+          load: true 
           tags: ghcr.io/fluanceifi/resume-frontend:${{ steps.tag.outputs.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Push to GHCR with Retry
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 5
+          max_attempts: 3 # 최초 포함, 총 시도횟수
+          retry_on: error
+          command: docker push ghcr.io/fluanceifi/resume-frontend:${{ steps.tag.outputs.sha }}
+
+      # 푸쉬 최종 실패 시
+      - name: Notify Failure
+        if: failure()
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "#ff0000" #/빨강
+          message: | #줄바꿈
+            ❌ **배포 빌드 실패**
+            - 레포지토리: ${{ github.repository }}
+            - 커밋: ${{ steps.tag.outputs.sha }}
+            - 상태: 3회 시도 후 최종 실패, 로그 확인 필요
 
       - name: Dispatch to infra repo
         uses: peter-evans/repository-dispatch@v3
@@ -45,3 +69,16 @@ jobs:
               "actor": "${{ github.actor }}",
               "sha": "${{ github.sha }}"
             }
+
+      - name: Notify Success
+        if: success()
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "#00ff00" #/초록
+          message: | #줄바꿈
+            ✅ **배포 빌드 성공**
+            - 레포지토리: ${{ github.repository }}
+            - 커밋: ${{ steps.tag.outputs.sha }}
+            - 상태: 이미지가 GHCR에 푸쉬되고, 인프라 레포로 전달되었습니다.
