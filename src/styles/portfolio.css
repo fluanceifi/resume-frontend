@@ -270,6 +270,64 @@
 .problem-card p + p { margin-top: 10px; }
 .problem-card ul { margin-top: 8px; padding-left: 18px; font-size: 0.88rem; color: #555; }
 
+/* problem-card 내 figure / img */
+.problem-card figure {
+  margin: 14px 0 0;
+}
+.problem-card figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.problem-card figcaption {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* 세로형(모바일 스크린샷 등) 이미지 — 가운데 정렬 + 폭 제한 */
+.problem-card figure.figure-narrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.problem-card figure.figure-narrow img {
+  max-width: 280px;
+  width: auto;
+}
+
+/* 크기 제한 이미지 — 가운데 정렬 + 최대 폭 지정 */
+.problem-card figure.figure-constrained {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.problem-card figure.figure-constrained img {
+  max-width: 560px;
+  width: 100%;
+}
+
+/* diagram-grid inside problem-card */
+.problem-card .diagram-grid {
+  margin-top: 14px;
+}
+/* 메일 비동기 처리 — 1열 풀 width */
+.mail-diagram-grid {
+  grid-template-columns: 1fr;
+}
+/* 벤치마크 비교 — 1행 2열 */
+.bench-diagram-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 10px;
+}
+@media (max-width: 600px) {
+  .bench-diagram-grid { grid-template-columns: 1fr; }
+}
+
 /* ── Table ───────────────────────────────────────────── */
 .table-wrap { overflow-x: auto; margin-top: 0; }
 .document table {
