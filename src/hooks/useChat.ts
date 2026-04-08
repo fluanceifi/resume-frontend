@@ -15,8 +15,9 @@ function cleanAnswerText(text: string): string {
   // 마크다운 각주·참고 섹션 제거
   return text
     .replace(/\[\^[^\]]*\]/g, '')
+    .replace(/\s*\[\d+\]/g, '')
     .replace(/\n---\n[\s\S]*$/, '')
-    .replace(/\n\*\*(참고|References?|출처)[^\n]*\n[\s\S]*$/i, '')
+    .replace(/\n\*{0,2}(참고 ?문서|참고|References?|출처)\*{0,2}:?\s*\n[\s\S]*$/i, '')
     .trim()
 }
 

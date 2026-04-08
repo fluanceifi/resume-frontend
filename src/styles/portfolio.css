@@ -238,6 +238,8 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fafafa;
+  min-width: 0;
+  overflow: hidden;
 }
 .problem-card .number {
   display: inline-block;
