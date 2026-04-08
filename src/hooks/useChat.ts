@@ -17,7 +17,6 @@ function cleanAnswerText(text: string): string {
     .replace(/\[\^[^\]]*\]/g, '')
     .replace(/\s*\[\d+\]/g, '')
     .replace(/\n---\n[\s\S]*$/, '')
-    .replace(/\n\*{0,2}(참고 ?문서|참고|References?|출처)\*{0,2}:?\s*\n[\s\S]*$/i, '')
     .trim()
 }
 
