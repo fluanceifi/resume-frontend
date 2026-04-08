@@ -43,6 +43,7 @@
 }
 .profile-photo {
   width: 160px;
+  aspect-ratio: 3 / 4;
   margin-bottom: var(--section-space);
   border-radius: 4px;
   object-fit: cover;
