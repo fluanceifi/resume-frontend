@@ -57,7 +57,7 @@ export default function Hero() {
   return (
     <header className="hero">
       <div className="hero-top">
-        <img className="profile-photo" src="/profile.png" alt="유승준 프로필" />
+        <img className="profile-photo" src="/images/profile.png" alt="유승준 프로필" />
         <div className="hero-text">
           <h1 className="hero-greeting">안녕하세요, 유승준입니다.</h1>
           <p className="hero-title">Backend Developer</p>
