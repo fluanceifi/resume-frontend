@@ -28,19 +28,6 @@ export default function SmuClubPage() {
           </article>
         </div>
 
-        <div className="stack">
-          <span className="chip">React + Vite</span>
-          <span className="chip">Spring Boot</span>
-          <span className="chip">JPA</span>
-          <span className="chip">MySQL</span>
-          <span className="chip">Nginx</span>
-          <span className="chip">Docker Compose</span>
-          <span className="chip">OCI Object Storage</span>
-          <span className="chip">Discord Webhook</span>
-          <span className="chip">Scheduler</span>
-          <span className="chip">JavaMailSender</span>
-          <span className="chip">@Async</span>
-        </div>
 
         <div className="summary-grid">
           <article className="summary-card">
@@ -58,7 +45,6 @@ export default function SmuClubPage() {
               <li>배치성 작업의 트랜잭션 범위를 재설계해 실패 전파 범위를 줄였다.</li>
               <li>합불결과 메일 발송을 비동기 처리로 전환해 서버 블로킹을 해소했다.</li>
               <li>JPA Fetch Join으로 인한 조회 누락 문제를 해결했다.</li>
-              <li>API 응답 포맷을 표준화해 프론트엔드 협업 비용을 낮췄다.</li>
             </ul>
           </article>
         </div>
@@ -84,6 +70,42 @@ export default function SmuClubPage() {
               <li>처리시간 75.4% 단축, 처리량 4.1배 향상이라는 수치로 개선 효과를 검증한 경험</li>
             </ul>
           </article>
+        </div>
+      </section>
+
+      <section className="page">
+        <h3>Skills</h3>
+        <div className="skills-rows">
+          <div className="skill-row">
+            <span className="skill-cat">Frontend</span>
+            <div className="tags">
+              <span className="tag">React + Vite</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">Backend &amp; DB</span>
+            <div className="tags">
+              <span className="tag">Spring Boot</span>
+              <span className="tag">JPA</span>
+              <span className="tag">MySQL</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">Infra</span>
+            <div className="tags">
+              <span className="tag">Nginx</span>
+              <span className="tag">Docker Compose</span>
+              <span className="tag">OCI</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">Integration</span>
+            <div className="tags">
+              <span className="tag">OCI Object Storage</span>
+              <span className="tag">Discord Webhook</span>
+              <span className="tag">Scheduler</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -275,34 +297,6 @@ export default function SmuClubPage() {
               <figcaption>관리자가 "합불결과 메일 발송하기" 버튼을 누르면 동기 발송으로 서버가 멈췄다.</figcaption>
             </figure>
 
-            <div className="subheading">시도한 해결책과 한계</div>
-
-            <p><strong>① BCC (숨은 참조)</strong></p>
-            <p>
-              수신자 목록 전체를 BCC에 넣어 SMTP 연결을 1번만 열고 한 번에 전송하는 방식이다. <br></br>
-              for문을 제거하고 전송은 딱 1번으로 줄어들어 속도는 드라마틱하게 빨라졌다. <br></br>
-              그러나 두 가지 한계가 있었다. <br></br>
-            </p>
-            <ul className="tight-list">
-              <li>개인화 불가 — "ㅇㅇ님, 합격을 축하드립니다"처럼 수신자 이름이 들어가는 순간 BCC는 쓸 수 없다.</li>
-              <li>수신자 제한 — SMTP 서버 대부분은 BCC 수신자를 50~100명으로 제한하며, 지원자가 500명으로 늘면 다시 터진다.</li>
-            </ul>
-            <p>
-              SMTP가 연결 비용이 비싼 이유는 매 전송마다 TCP 연결 → 인증 → 메일 전송 → 연결 해제 과정을 반복하기 때문이다.
-            </p>
-            <figure className="figure-constrained">
-              <img src="/images/smtpprotocol.png" alt="SMTP 프로토콜 시퀀스 다이어그램" />
-              <figcaption>SMTP는 매 전송마다 TCP HandShake → Auth → Send → Close 과정을 반복해 연결 비용이 크다.</figcaption>
-            </figure>
-
-            <p><strong>② Resend API Batch Sending</strong></p>
-            <p>
-              SMTP 대신 HTTP 기반 Resend API를 사용하면 수백 건을 한 번에 처리할 수 있고,
-              연결 오버헤드 없이 개인화 메일도 가능하다. <br></br>
-              그러나 FreeTier 한도가 하루 100건이라, 지원자가 101명이 되는 순간 유료로 전환해야 한다. <br></br>
-              비즈니스 모델이 없는 학교 동아리 플랫폼에서 유료 메일 API는 오버스펙이라 제외했다. <br></br>
-            </p>
-
             <div className="subheading">해결 — @Async + ThreadPoolTaskExecutor</div>
             <p>
               메일 발송 작업을 별도 스레드에 위임하고, 메인 스레드는 즉시 응답을 반환하는 방식을 선택했다. <br></br>
@@ -410,37 +404,6 @@ public class AsyncConfig {
               <li>JPA 조인 전략을 요구사항 기준으로 선택해야 한다는 기준을 팀 내에 공유할 수 있었다.</li>
             </ul>
           </article>
-          {/* Problem 05 */}
-          <article className="problem-card">
-            <span className="number">Problem 05</span>
-            <h3>API 응답 형식이 제각각이면 프론트엔드에 불필요한 방어 코드가 증가한다</h3>
-
-            <div className="subheading">문제</div>
-            <p>
-              초기에는 API마다 응답 구조와 메시지 해석 방식이 달라질 수 있었고,
-              프론트엔드는 엔드포인트별로 별도의 분기 처리를 작성해야 했다. <br></br>
-              이러한 구조는 협업 비용을 높이고, 프론트엔드가 비즈니스 로직보다 예외 대응 코드에 더 많은 시간을 투입하게 만든다.
-            </p>
-
-            <div className="subheading">해결</div>
-            <p>
-              <code>{'ApiResponseDto<T>'}</code>를 중심으로 응답 포맷을 통일하고, <br></br>
-              동아리 목록과 상세 응답의 구조를 일관되게 정리해 프론트엔드가 동일한 방식으로 응답을 해석할 수 있도록 구성했다.
-            </p>
-            <ul className="tight-list">
-              <li>공통 응답 필드: <code>status</code>, <code>message</code>, <code>data</code>, <code>errorCode</code></li>
-              <li>성공/실패 응답 생성 방식 표준화</li>
-              <li>목록/상세 API의 응답 형태와 메시지 해석 방식을 일관되게 정리</li>
-              <li>프론트엔드가 엔드포인트별 예외 분기를 최소화할 수 있도록 응답 계약을 명확히 정리</li>
-            </ul>
-
-            <div className="subheading">결과</div>
-            <ul className="tight-list">
-              <li>프론트엔드가 API별 예외 케이스를 줄일 수 있게 되었다.</li>
-              <li>응답 해석 방식이 통일되어 협업 효율이 향상되었다.</li>
-              <li>프론트엔드와 백엔드 간 응답 계약이 명확해져 유지보수성이 향상되었다.</li>
-            </ul>
-          </article>
         </div>
       </section>
 
@@ -479,13 +442,6 @@ public class AsyncConfig {
             </ul>
           </article>
 
-          <article className="improvement-card">
-            <h3>협업 생산성</h3>
-            <ul className="tight-list">
-              <li>API 응답 구조를 표준화해 프론트엔드 대응 비용을 줄였다.</li>
-              <li>프론트엔드와 백엔드 간의 응답 계약을 명확하게 정리했다.</li>
-            </ul>
-          </article>
 
           <article className="improvement-card">
             <h3>서비스 운영 관점의 의사결정</h3>
@@ -521,12 +477,6 @@ public class AsyncConfig {
               <code>GuestClubController</code>,{' '}
               <code>GuestClubService</code>,{' '}
               <code>ClubRepository</code>
-            </li>
-            <li>
-              응답 표준화 관련 클래스:{' '}
-              <code>ApiResponseDto</code>,{' '}
-              <code>ClubsRepresentationAssembler</code>,{' '}
-              <code>ClubResponseDto</code>
             </li>
             <li>
               기술 포스팅:{' '}

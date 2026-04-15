@@ -84,6 +84,7 @@ export default function Hero() {
             </button>
             <a href="https://github.com/fluanceifi" target="_blank" rel="noopener noreferrer">github.com/fluanceifi</a>
             <a href="https://www.linkedin.com/in/sjy-511661289/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <span>1999. 02. 03 (28)</span>
           </nav>
         </div>
       </div>

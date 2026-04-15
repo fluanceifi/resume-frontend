@@ -21,21 +21,13 @@ const PROJECTS: Project[] = [
     stack: ['React + Vite', 'Spring Boot', 'JPA', 'MySQL', 'Docker Compose', 'Nginx', 'OCI', 'Discord Webhook'],
   },
   {
-    name: 'Hybrid RAG Portfolio',
+    name: 'Hybrid RAG',
     links: [
       { label: 'Portfolio →', href: '/hybrid-rag' },
       { label: 'GitHub →', href: 'https://github.com/fluanceifi/hybrid-search-rag' },
     ],
     desc: '토스페이먼츠 API 실문서를 대상으로 Elasticsearch 기반 RAG 검색 품질을 개선한 프로젝트. BM25 query 전략 개선으로 Top-1 정확도 35% → 95%, RRF section_key dedup 적용으로 45% → 100% 달성. baseline을 두 트랙으로 분리해 개선 원인을 독립적으로 검증했다.',
     stack: ['FastAPI', 'Elasticsearch', 'Lucene Analyzer', 'BM25', 'kNN (HNSW)', 'Weighted RRF', 'OpenAI Embedding', 'Docker Compose'],
-  },
-  {
-    name: 'Woori Card Scope',
-    links: [
-      { label: 'GitHub →', href: 'https://github.com/fluanceifi/woori_card_scope' },
-    ],
-    desc: '카드 관련 데이터를 다루며 구현한 개인 프로젝트 저장소.',
-    stack: ['Spring Boot', 'MySQL', 'JPA'],
   },
 ]
 

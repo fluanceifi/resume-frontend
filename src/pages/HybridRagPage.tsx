@@ -7,7 +7,7 @@ export default function HybridRagPage() {
       {/* ────────── HERO ────────── */}
       <section className="page hero">
         <span className="eyebrow">Project Portfolio</span>
-        <h1>Hybrid RAG Portfolio</h1>
+        <h1>Hybrid RAG</h1>
         <p className="lead">
           토스페이먼츠 API 실문서를 대상으로 Elasticsearch 기반 RAG 검색 품질을 개선한 프로젝트다.
           Apache Lucene Analyzer + BM25 + kNN(HNSW) + Weighted RRF 조합을 운영 관점에서 튜닝했고,
@@ -29,17 +29,6 @@ export default function HybridRagPage() {
           </article>
         </div>
 
-        <div className="stack">
-          <span className="chip">Elasticsearch</span>
-          <span className="chip">Lucene Analyzer</span>
-          <span className="chip">BM25</span>
-          <span className="chip">kNN (HNSW)</span>
-          <span className="chip">Weighted RRF</span>
-          <span className="chip">text-embedding-3-small</span>
-          <span className="chip">text-embedding-3-large</span>
-          <span className="chip">FastAPI</span>
-          <span className="chip">Docker Compose</span>
-        </div>
 
         <div className="baseline-grid">
           <article className="summary-card">
@@ -88,6 +77,41 @@ export default function HybridRagPage() {
               </a>
             </p>
           </article>
+        </div>
+      </section>
+
+      <section className="page">
+        <h3>Skills</h3>
+        <div className="skills-rows">
+          <div className="skill-row">
+            <span className="skill-cat">Backend</span>
+            <div className="tags">
+              <span className="tag">FastAPI</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">Search</span>
+            <div className="tags">
+              <span className="tag">Elasticsearch</span>
+              <span className="tag">Lucene Analyzer</span>
+              <span className="tag">BM25</span>
+              <span className="tag">kNN (HNSW)</span>
+              <span className="tag">Weighted RRF</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">AI / RAG</span>
+            <div className="tags">
+              <span className="tag">OpenAI Embedding (small · large)</span>
+              <span className="tag">LangChain</span>
+            </div>
+          </div>
+          <div className="skill-row">
+            <span className="skill-cat">Infra</span>
+            <div className="tags">
+              <span className="tag">Docker Compose</span>
+            </div>
+          </div>
         </div>
       </section>
 
