@@ -206,13 +206,13 @@ export default function SmuClubPage() {
 
             <div className="subheading">해결</div>
             <p>
-              스케줄러 메서드에 <code>@DiscordAlert</code> 커스텀 어노테이션을 적용,{' '} <code>Aspect</code>에서 <code>@AfterThrowing</code>으로 예외를 감지한다.{' '} <br></br>
+              스케줄러 메서드에 <code>@DiscordAlert</code> 커스텀 어노테이션을 적용,{' '} <code>Aspect</code>에서 <code>@Around</code>으로 예외를 감지한다.{' '} <br></br>
             <code>Service</code>가 <code>Discord Webhook API</code>로 장애 알림을 보내는 구조를 적용했다.
             </p>
             <figure className="figure-constrained">
               <img src="/images/discordalert.png" alt="Discord 장애 알림 동작 흐름" />
               <figcaption>
-                스케줄러 예외 발생 → AOP @AfterThrowing 감지 → DiscordAlertService → Discord Webhook 전송까지의 내부 흐름이다.
+                스케줄러 예외 발생 → AOP @Around 감지 → DiscordAlertService.send() → Webhook 전송 -> 원본 예외 rethrow 까지의 내부 흐름이다.
               </figcaption>
             </figure>
             <ul className="tight-list">
