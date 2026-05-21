@@ -212,7 +212,7 @@ export default function SmuClubPage() {
             <figure className="figure-constrained">
               <img src="/images/discordalert.png" alt="Discord 장애 알림 동작 흐름" />
               <figcaption>
-                스케줄러 예외 발생 → AOP @Around 감지 → DiscordAlertService.send() → Webhook 전송 -> 원본 예외 rethrow 까지의 내부 흐름이다.
+                스케줄러 예외 발생 → AOP @Around 감지 → DiscordAlertService.send() → Webhook 전송  → 원본 예외 rethrow 까지의 내부 흐름이다.
               </figcaption>
             </figure>
             <ul className="tight-list">
