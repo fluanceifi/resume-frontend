@@ -1,5 +1,6 @@
-// RAG 챗 엔드포인트 (Vercel Edge). 질의 임베딩 → 코사인 top-k 검색 → OpenAI 챗 스트리밍을 SSE로 중계.
-// 프론트는 이 SSE를 읽어 토큰을 라이브로 렌더한다.
+// RAG 챗 엔드포인트 (Vercel Edge). 스트림 Response를 즉시 반환하고, 스트림 안에서
+// 질의 임베딩 → 코사인 top-k → OpenAI 챗 스트리밍을 처리해 SSE로 중계한다.
+// (사전 작업을 응답 전에 await 하지 않으므로 게이트웨이 504를 피한다.)
 import kb from './_data/embeddings.json'
 
 export const config = { runtime: 'edge' }
@@ -7,11 +8,13 @@ export const config = { runtime: 'edge' }
 const EMBED_MODEL = 'text-embedding-3-small' // build-embeddings.mjs와 반드시 동일
 const CHAT_MODEL = 'gpt-4o-mini'
 const TOP_K = 5
+const EMBED_TIMEOUT_MS = 12000
+const CHAT_TIMEOUT_MS = 30000
 
-type Record = { id: number; text: string; embedding: number[] }
-const RECORDS = (kb as { records: Record[] }).records
+type Rec = { id: number; text: string; embedding: number[] }
+const RECORDS = (kb as { records: Rec[] }).records
 
-const CORS = {
+const CORS: Record<string, string> = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -23,18 +26,28 @@ function cosine(a: number[], b: number[]): number {
   return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8)
 }
 
+async function fetchWithTimeout(url: string, init: RequestInit, ms: number): Promise<Response> {
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), ms)
+  try {
+    return await fetch(url, { ...init, signal: ctrl.signal })
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
 async function embedQuery(query: string, apiKey: string): Promise<number[]> {
-  const res = await fetch('https://api.openai.com/v1/embeddings', {
+  const res = await fetchWithTimeout('https://api.openai.com/v1/embeddings', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({ model: EMBED_MODEL, input: query }),
-  })
+  }, EMBED_TIMEOUT_MS)
   if (!res.ok) throw new Error(`embeddings ${res.status}`)
   const json = await res.json()
   return json.data[0].embedding
 }
 
-function retrieve(queryVec: number[]): Record[] {
+function retrieve(queryVec: number[]): Rec[] {
   return RECORDS
     .map(r => ({ r, score: cosine(queryVec, r.embedding) }))
     .sort((a, b) => b.score - a.score)
@@ -42,7 +55,7 @@ function retrieve(queryVec: number[]): Record[] {
     .map(x => x.r)
 }
 
-function buildMessages(query: string, contexts: Record[]) {
+function buildMessages(query: string, contexts: Rec[]) {
   const context = contexts.map((c, i) => `[자료 ${i + 1}]\n${c.text}`).join('\n\n')
   const system = [
     '너는 백엔드 개발자 유승준의 포트폴리오를 소개하는 AI 어시스턴트다.',
@@ -64,64 +77,63 @@ export default async function handler(req: Request): Promise<Response> {
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS })
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405, headers: CORS })
 
-  const apiKey = (globalThis as any).process?.env?.OPENAI_API_KEY
-  if (!apiKey) return sse_error('서버에 OPENAI_API_KEY가 설정되지 않았습니다.')
-
+  // 본문 파싱만 먼저(빠름). 무거운 작업은 전부 스트림 안에서.
   let query = ''
-  try { query = (await req.json())?.query ?? '' } catch { /* ignore */ }
-  query = String(query).trim()
-  if (!query) return sse_error('질문을 입력해주세요.')
-  if (query.length > 1000) query = query.slice(0, 1000)
+  try { query = ((await req.json()) as { query?: string })?.query ?? '' } catch { /* ignore */ }
+  query = String(query).trim().slice(0, 1000)
 
-  let contexts: Record[]
-  try {
-    const qvec = await embedQuery(query, apiKey)
-    contexts = retrieve(qvec)
-  } catch {
-    return sse_error('검색 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
-  }
-
-  const upstream = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model: CHAT_MODEL,
-      messages: buildMessages(query, contexts),
-      stream: true,
-      temperature: 0.3,
-    }),
-  })
-  if (!upstream.ok || !upstream.body) return sse_error('AI 응답 생성에 실패했습니다.')
-
-  // OpenAI SSE(delta.content) → 우리 SSE(data:{"t": token})로 변환
   const encoder = new TextEncoder()
-  const decoder = new TextDecoder()
-  const reader = upstream.body.getReader()
-  let buf = ''
 
   const stream = new ReadableStream({
-    async pull(controller) {
-      const { done, value } = await reader.read()
-      if (done) {
-        controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-        controller.close()
-        return
-      }
-      buf += decoder.decode(value, { stream: true })
-      const lines = buf.split('\n')
-      buf = lines.pop() ?? ''
-      for (const line of lines) {
-        const t = line.trim()
-        if (!t.startsWith('data:')) continue
-        const payload = t.slice(5).trim()
-        if (payload === '[DONE]') continue
-        try {
-          const token = JSON.parse(payload)?.choices?.[0]?.delta?.content
-          if (token) controller.enqueue(encoder.encode(`data: ${JSON.stringify({ t: token })}\n\n`))
-        } catch { /* 불완전 조각 무시 */ }
+    async start(controller) {
+      const send = (obj: unknown) => controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`))
+      const finish = () => { controller.enqueue(encoder.encode('data: [DONE]\n\n')); controller.close() }
+
+      // 즉시 바이트를 흘려 게이트웨이가 연결을 유지하도록 한다(504 방지).
+      controller.enqueue(encoder.encode(': connected\n\n'))
+
+      try {
+        const apiKey = (globalThis as { process?: { env?: Record<string, string> } }).process?.env?.OPENAI_API_KEY
+        if (!apiKey) { send({ error: '서버에 OPENAI_API_KEY가 설정되지 않았습니다.' }); return finish() }
+        if (!query) { send({ error: '질문을 입력해주세요.' }); return finish() }
+
+        const qvec = await embedQuery(query, apiKey)
+        const contexts = retrieve(qvec)
+
+        const upstream = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+          body: JSON.stringify({ model: CHAT_MODEL, messages: buildMessages(query, contexts), stream: true, temperature: 0.3 }),
+        }, CHAT_TIMEOUT_MS)
+
+        if (!upstream.ok || !upstream.body) { send({ error: `AI 응답 생성 실패 (${upstream.status})` }); return finish() }
+
+        const reader = upstream.body.getReader()
+        const decoder = new TextDecoder()
+        let buf = ''
+        for (;;) {
+          const { done, value } = await reader.read()
+          if (done) break
+          buf += decoder.decode(value, { stream: true })
+          const lines = buf.split('\n')
+          buf = lines.pop() ?? ''
+          for (const line of lines) {
+            const t = line.trim()
+            if (!t.startsWith('data:')) continue
+            const payload = t.slice(5).trim()
+            if (payload === '[DONE]') continue
+            try {
+              const token = JSON.parse(payload)?.choices?.[0]?.delta?.content
+              if (token) send({ t: token })
+            } catch { /* 불완전 조각 무시 */ }
+          }
+        }
+        finish()
+      } catch (e) {
+        const aborted = (e as Error)?.name === 'AbortError'
+        try { send({ error: aborted ? '응답 시간이 초과되었습니다. 다시 시도해주세요.' : '처리 중 오류가 발생했습니다.' }); finish() } catch { /* already closed */ }
       }
     },
-    cancel() { reader.cancel() },
   })
 
   return new Response(stream, {
@@ -129,15 +141,6 @@ export default async function handler(req: Request): Promise<Response> {
       ...CORS,
       'Content-Type': 'text/event-stream; charset=utf-8',
       'Cache-Control': 'no-cache, no-transform',
-      Connection: 'keep-alive',
     },
-  })
-}
-
-function sse_error(message: string): Response {
-  const body = `data: ${JSON.stringify({ error: message })}\n\ndata: [DONE]\n\n`
-  return new Response(body, {
-    status: 200,
-    headers: { ...CORS, 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-cache' },
   })
 }
