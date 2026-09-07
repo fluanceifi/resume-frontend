@@ -2,12 +2,14 @@ node_modules
 dist
 .DS_Store
 *.local
-.env.local
-.env.production.local
-.env.development.local
 .idea/
 _legacy/
-.env.development
+
+# ── 환경변수 / 시크릿 (API 키 노출 방지) ──
+# .env* 는 전부 무시. 커밋해도 되는 예시 파일만 예외.
+.env
+.env.*
+!.env.example
 
 # Claude Code
 .claude/
