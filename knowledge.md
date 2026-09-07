@@ -108,7 +108,7 @@
 
 ### SMU CLUB 트러블슈팅 4 — 운영/협업 개선
 
-- 스케줄러 장애 감지: `@DiscordAlert` 커스텀 어노테이션 + AOP `@AfterThrowing`으로 스케줄러 예외를 감지해 Discord Webhook으로 즉시 알림을 보냈습니다(알림은 @Async로 메인 흐름 차단 방지). 이전에는 실패가 로그에만 남아 사후에야 인지했습니다.
+- 스케줄러 장애 감지: `@DiscordAlert` 커스텀 어노테이션 + AOP `@Around`로 스케줄러 예외를 감지해 `DiscordAlertService.send()`가 Discord Webhook으로 즉시 알림을 보낸 뒤 원본 예외를 다시 던지는(rethrow) 구조입니다(알림은 @Async로 메인 흐름 차단 방지). 이전에는 실패가 로그에만 남아 사후에야 인지했습니다.
 - JPA Fetch Join 조회 누락: 상세 조회에서 이미지가 없는 동아리가 INNER JOIN FETCH로 누락되던 문제를, LEFT JOIN FETCH로 바꿔 연관 엔티티가 없어도 부모가 조회되도록 했습니다.
 - API 응답 표준화: `ApiResponseDto<T>`(status, message, data, errorCode)로 응답 포맷을 통일해 프론트엔드 협업 비용을 줄였습니다.
 
