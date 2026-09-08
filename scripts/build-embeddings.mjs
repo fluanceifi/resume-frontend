@@ -78,11 +78,25 @@ async function embed(input) {
 
 const md = readFileSync(KNOWLEDGE, 'utf8')
 const chunks = chunk(md)
-console.log(`청크 ${chunks.length}개 임베딩 중 (model=${EMBED_MODEL})...`)
+console.log(`[embeddings] 청크 ${chunks.length}개 임베딩 중 (model=${EMBED_MODEL})...`)
 
-const vectors = await embed(chunks) // 배치 임베딩 (한 번에 전송)
-const records = chunks.map((text, i) => ({ id: i, text, embedding: vectors[i] }))
+// 임베딩 생성이 실패해도 배포는 계속되어야 한다. 키 만료·한도 초과·OpenAI 장애로
+// 사이트 전체 빌드가 깨지면 안 되므로, 커밋된 embeddings.json이 있으면 그걸 쓰고 넘어간다.
+try {
+  const vectors = await embed(chunks) // 배치 임베딩 (한 번에 전송)
+  const records = chunks.map((text, i) => ({ id: i, text, embedding: vectors[i] }))
 
-mkdirSync(dirname(OUT), { recursive: true })
-writeFileSync(OUT, JSON.stringify({ model: EMBED_MODEL, dim: vectors[0].length, records }))
-console.log(`완료: ${OUT} (${records.length}개, dim=${vectors[0].length})`)
+  mkdirSync(dirname(OUT), { recursive: true })
+  writeFileSync(OUT, JSON.stringify({ model: EMBED_MODEL, dim: vectors[0].length, records }))
+  console.log(`[embeddings] 완료: ${OUT} (${records.length}개, dim=${vectors[0].length})`)
+} catch (err) {
+  const reason = err?.message ?? String(err)
+  if (existsSync(OUT)) {
+    console.warn(`[embeddings] 재생성 실패로 건너뜁니다: ${reason}`)
+    console.warn('[embeddings] 커밋된 embeddings.json으로 배포를 계속합니다.')
+    console.warn('[embeddings] knowledge.md 변경은 이 배포에 반영되지 않습니다. OPENAI_API_KEY와 사용 한도를 확인하세요.')
+    process.exit(0)
+  }
+  console.error(`[embeddings] 재생성 실패, 대체할 embeddings.json도 없습니다: ${reason}`)
+  process.exit(1)
+}
