@@ -17,7 +17,7 @@
 ```
 
 - 프론트와 API가 **하나의 Vercel 프로젝트**에 함께 배포된다(같은 오리진, CORS 불필요).
-- 지식베이스 원본: `knowledge.md` (포트폴리오 3개 프로젝트: 한강페이 · SMU CLUB · Woori Card Scope).
+- 지식베이스 원본: `knowledge.md` (유승준 본인의 1인칭 기록 — 프로필/이력/성향 + 프로젝트 4개: 한강페이 · SMU CLUB · Woori Card Scope · Hybrid RAG + 이 사이트 자체).
 - 임베딩은 배포 전 **1회 사전 생성**해 `api/_data/embeddings.json`로 커밋한다(질의마다 재임베딩하지 않음).
 
 ## 주요 파일

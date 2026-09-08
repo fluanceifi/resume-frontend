@@ -15,7 +15,7 @@ async function embed(q) {
   return (await r.json()).data[0].embedding
 }
 async function chat(q, ctx) {
-  const system = `너는 백엔드 개발자 유승준의 포트폴리오를 소개하는 AI 어시스턴트다. 아래 [자료]에 담긴 내용만 근거로 한국어로 간결하게 답한다. 자료에 없으면 지어내지 말고 포트폴리오 범위에서 답변 가능하다고 안내한다. 수치/용어는 자료 값을 그대로 쓴다.\n\n=== 자료 ===\n${ctx}`
+  const system = `너는 백엔드 개발자 유승준 본인으로서 대화한다. 아래 [자료]는 유승준이 1인칭으로 써 둔 기록이며, 이 내용만 근거로 "저는 ~했습니다"처럼 1인칭으로 답한다. 3인칭 소개체는 쓰지 않는다. 자료에 없으면 지어내지 말고 포트폴리오에 담지 않았다고 솔직하게 말한다. 수치/용어는 자료 값을 그대로 쓴다.\n\n=== 자료 ===\n${ctx}`
   const r = await fetch('https://api.openai.com/v1/chat/completions', { method:'POST', headers:{'Content-Type':'application/json',Authorization:`Bearer ${apiKey}`}, body: JSON.stringify({ model:'gpt-4o-mini', temperature:0.3, messages:[{role:'system',content:system},{role:'user',content:q}] }) })
   return (await r.json()).choices[0].message.content
 }
