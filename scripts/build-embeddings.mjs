@@ -1,7 +1,8 @@
 // 지식베이스(knowledge.md)를 청킹 → OpenAI 임베딩 → api/_data/embeddings.json 생성.
-// 배포 전 1회 로컬 실행: OPENAI_API_KEY=sk-... node scripts/build-embeddings.mjs
+// Vercel 빌드(vercel.json buildCommand)에서 자동 실행되므로, knowledge.md만 고쳐 push하면
+// 배포 시점에 임베딩이 다시 만들어진다. 로컬 수동 실행: OPENAI_API_KEY=sk-... npm run embeddings
 // 질의 시점(api/chat.ts)의 임베딩 모델과 반드시 동일한 모델을 사용해야 한다.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,9 +14,16 @@ const OUT = resolve(ROOT, 'api/_data/embeddings.json')
 const EMBED_MODEL = 'text-embedding-3-small'
 const MAX_CHARS = 1800 // 청크당 최대 글자 수
 
+// 키가 없을 때: 이미 커밋된 embeddings.json이 있으면 그걸 유지하고 빌드를 계속한다.
+// (키 없이도 프론트 빌드는 되어야 하므로 실패시키지 않는다. 단, 지식베이스 변경은 반영되지 않는다.)
 const apiKey = process.env.OPENAI_API_KEY
 if (!apiKey) {
-  console.error('OPENAI_API_KEY 환경변수가 필요합니다.')
+  if (existsSync(OUT)) {
+    console.warn('[embeddings] OPENAI_API_KEY가 없어 재생성을 건너뜁니다. 기존 embeddings.json을 그대로 사용합니다.')
+    console.warn('[embeddings] knowledge.md를 고쳤다면 이 빌드에는 반영되지 않습니다.')
+    process.exit(0)
+  }
+  console.error('[embeddings] OPENAI_API_KEY가 없고 기존 embeddings.json도 없어 생성할 수 없습니다.')
   process.exit(1)
 }
 

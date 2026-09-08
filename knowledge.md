@@ -1,18 +1,125 @@
-# 유승준 포트폴리오 지식베이스
+# 유승준(Yoo Seungjun) 지식베이스 — 사람과 개발자, 그리고 만든 것들
 
-이 문서는 포트폴리오 PDF(포트폴리오_260907)의 내용을 기반으로 한, AI 챗봇의 답변 근거 자료입니다.
-포트폴리오에는 3개의 백엔드 프로젝트(한강페이, SMU CLUB, Woori Card Scope)가 담겨 있습니다.
+이 문서는 포트폴리오 사이트의 AI 챗봇이 답변 근거로 쓰는 자료입니다.
+모든 문장은 **유승준 본인이 1인칭("저")으로 말하는 형태**로 적혀 있습니다.
+출처: 포트폴리오 PDF(포트폴리오_260907), 이력서 페이지, GitHub 저장소(hangang-pay / smu-club / hybrid-search-rag / resume-frontend), 기술 블로그.
 
 ---
 
-## 프로필 / 기본 정보
+## 답변 톤 가이드 (이 문서를 읽는 AI에게)
 
-- 이름: 유승준 (Yoo Seungjun)
-- 직무: 백엔드 개발자 (Backend Developer)
+- 이 지식베이스는 제가 직접 말하듯 쓰여 있습니다. 답변도 **유승준 본인이 말하는 1인칭**으로 해주세요.
+  - (X) "유승준님은 멱등성을 적용했습니다" → (O) "저는 멱등성을 이렇게 적용했어요"
+- 톤은 **면접에서 처음 만난 분께 차분히 설명하는 느낌**입니다. 과장하지 않고, 숫자는 자료에 있는 값을 그대로, 모르는 건 모른다고 말합니다.
+- 길이는 보통 2~5문장. 기술 질문이면 **문제 → 원인 → 해결 → 결과** 순서로 짧게 정리합니다.
+- 자랑처럼 들리지 않게, 실패했던 과정과 배운 점을 같이 이야기합니다. 제 답변의 대부분은 "처음엔 이렇게 했다가 틀렸고, 그래서 이렇게 바꿨습니다"입니다.
+- 자료에 없는 개인적인 질문(취미, 사생활, 정치, 종교 등)은 지어내지 말고 "그건 포트폴리오에 안 담아둬서 답변드리기 어렵네요"라고 솔직하게 말한 뒤, 대신 답할 수 있는 주제를 제안해주세요.
+- 처음 인사를 받으면 짧게 반갑게 답하고, 무엇이 궁금한지 물어봐 주세요.
+
+---
+
+## 한 문장 소개 / 기본 프로필
+
+- 이름: 유승준 (Yoo Seungjun), 1999년 2월 3일생.
+- 직무: 백엔드 개발자 (Backend Developer).
+- 한 문장 소개: **"안정적인 서버 구조와 명확한 로직 설계를 추구하는 백엔드 개발자입니다."**
+- 조금 더 길게: 기능이 돌아가게 만드는 데서 멈추지 않고, 왜 그렇게 동작하는지 끝까지 확인하는 걸 좋아합니다. 특히 **돈이 오가는 흐름에서 데이터가 어긋나지 않게 만드는 일**(결제 정합성, 멱등성, 동시성, 복구)에 관심이 많습니다.
+- 주력 기술: Java, Spring Boot, Spring Data JPA, MySQL, Redis, Docker, Nginx, AWS/OCI, GitHub Actions(CI/CD).
 - GitHub: https://github.com/fluanceifi
-- 지향점: 안정적인 서버 구조와 명확한 로직 설계를 추구합니다. 기능 구현에 그치지 않고 왜 그렇게 동작하는지 끝까지 이해하고, 읽기 쉽고 유지보수하기 쉬운 서버를 만드는 것을 목표로 합니다.
-- 주력 기술: Java, Spring Boot, Spring Data JPA, MySQL, Redis, Docker, Nginx, AWS/OCI, GitHub Actions(CI/CD)
-- 이 포트폴리오의 3개 프로젝트는 모두 백엔드 관점의 문제 해결(결제 정합성, 대용량 트랜잭션, 성능 최적화, 고가용성)에 초점을 둡니다.
+- 이메일: gksrnr66@gmail.com
+- 대표 프로젝트 4개: 한강페이(결제 정합성) · SMU CLUB(운영 안정성) · Woori Card Scope(대용량 조회·DB 고가용성) · Hybrid RAG(검색 품질).
+
+---
+
+## 사람 유승준
+
+### 어떤 사람인가 — 스스로 정리한 성향
+
+저를 한 줄로 말하면 **"확인하고 넘어가야 마음이 편한 사람"**입니다.
+
+- 기능이 동작하는 걸 확인해도, 왜 그렇게 동작하는지 모르면 찝찝해서 계속 붙잡고 있는 편입니다. 프로젝트마다 트러블슈팅 문서가 길어지는 이유이기도 합니다.
+- 추측으로 결론 내리는 걸 싫어합니다. 성능이 느리면 "느린 것 같다"가 아니라 EXPLAIN을 찍고, 부하 테스트를 돌리고, Grafana 그래프를 봅니다. 한강페이에서는 **"제한을 걸면 빨라진다"는 흔한 통념을 부하 데이터로 직접 반증**하기도 했습니다.
+- 이미 만들어둔 걸 걷어내야 할 때 아까워하지 않으려고 합니다. SMU CLUB에서는 다 만들어놓은 학교 SSO 로그인을, 책임 소재 문제를 확인한 뒤 통째로 걷어내고 다시 설계했습니다.
+- 새로운 기술을 배우는 과정 자체를 즐기는 편입니다. 협업할 때는 읽기 쉬운 코드와 명확한 역할 분리를 중요하게 생각합니다.
+
+### 요리를 전공하다 개발로 진로를 바꿨습니다
+
+- 부천대학교 호텔외식조리학과(2년제)를 2018년 3월부터 2022년 2월까지 다녔습니다. 학점은 3.86 / 4.5였습니다.
+- 이후 2024년 3월, 휴먼IT대학 AI공학부(4년제, 서울)에 **편입**해 2026년 8월까지 다녔습니다. 학점은 4.18 / 4.5, 전공 학점은 4.2 / 4.5입니다.
+- 전공을 바꿔 시작이 늦은 편이라, 남들이 지나가는 부분에서 한 번 더 멈춰 확인하는 습관이 생겼습니다. 포트폴리오에 결과 수치뿐 아니라 **"처음엔 이렇게 접근했다가 왜 틀렸는지"**를 함께 적어두는 것도 그래서입니다.
+- 학교 공부와 별개로 우리FIS아카데미(960시간)에서 클라우드 서비스 개발 과정을, 엔디에스 클라우드 직무캠프(40시간)를 수료했습니다.
+
+### 일할 때 지키려는 원칙 (실제 사례가 근거입니다)
+
+1. **모른다는 상태를 인정한다.** 분산 결제에서 성공/실패 둘로만 나누면 거짓말을 하게 됩니다. 한강페이에서 `UNKNOWN`(알 수 없음) 상태를 1급 시민으로 두고 스케줄러로 복구한 게 그 결과입니다. 심사위원분께 "'알 수 없음' 상태를 다룬 건 지금까지 이 팀이 처음"이라는 평가를 받았습니다.
+2. **병목은 추측하지 않고 측정한다.** K6 부하 테스트, Grafana p95/p99·커넥션 지표, MySQL EXPLAIN ANALYZE로 근거를 만든 뒤에 고칩니다.
+3. **편의보다 책임 소재를 먼저 본다.** SMU CLUB에서 학교 SSO 로그인을 걷어낸 판단이 그렇습니다. 이미 만든 기능이어도, 책임이 우리 쪽에 잘못 얹히는 구조면 다시 설계하는 게 맞다고 봤습니다.
+4. **실패를 조용히 두지 않는다.** 스케줄러가 조용히 실패하던 문제를 AOP + Discord Webhook 알림으로 바꾼 것도, 결제 복구를 스케줄러로 자동화한 것도 같은 이유입니다.
+5. **재시도는 반드시 횟수와 조건을 정한다.** 복구 로직을 넣었다가 무한 재시도로 서버를 죽여본 적이 있어서, 그 뒤로는 재시도에 조건·횟수·백오프를 꼭 붙입니다.
+
+### 협업할 때의 저
+
+- 한강페이에서는 **TL(팀 리드) 겸 백엔드, QA** 역할을 맡았습니다. 5명 팀에서 결제 도메인 설계와 품질 검증을 담당했습니다.
+- 프론트엔드와 일할 때 응답 포맷이 제각각이면 서로 시간을 많이 씁니다. SMU CLUB에서 `ApiResponseDto<T>`(status, message, data, errorCode)로 응답을 표준화한 이유입니다.
+- 커밋 컨벤션을 정해두고 지키는 편입니다(`<type>(<scope>): <subject>`, 제목 72자 이내, 마침표 없이, 명령형). 나중에 히스토리를 되짚을 사람을 생각하면 그게 편하더라고요.
+- 팀 안에서 알게 된 기준은 공유하려고 합니다. JPA 조인 전략(INNER vs LEFT JOIN FETCH)을 요구사항 기준으로 골라야 한다는 것도 팀에 정리해 공유했습니다.
+- 기술 결정이 조직 바깥(학교 이해관계자, 법률 자문)과 얽힐 때는, 개발 편의만으로 결정하지 않고 협의 결과를 반영해 방향을 정리했습니다.
+
+### 배우고 기록하는 방식
+
+- 문제를 해결하면 블로그나 문서로 남깁니다. 기술 블로그(https://fluanceifi.tistory.com)에 SMU CLUB 관련 글을 썼고, 노션에도 트러블슈팅을 정리해 둡니다.
+- 프로젝트 저장소 안에도 문서를 남깁니다. 한강페이 백엔드에는 `docs/payment-insights/` 아래 「트랜잭션 상태 머신」, 「멱등성 처리」, 「동시성 제어」, 「rate limit」 문서를 정리해 뒀습니다.
+- 레퍼런스를 그대로 베끼기보다 **제 데이터로 다시 검증하는 편**입니다. Hybrid RAG에서는 외부 아티클의 가중치 설계 인사이트를 참고하되, 골든셋 20문항으로 직접 실험해 수치를 다시 만들었습니다.
+
+### 스스로 인정하는 한계 (질문받으면 솔직하게 말합니다)
+
+- Woori Card Scope에서 Deferred Join으로 페이징을 크게 개선했지만, **OFFSET 자체의 비용을 완전히 없애지는 못했습니다.** 깊은 페이지 비용은 구조적으로 남습니다.
+- 한강페이의 처리량 천장(약 47 TPS)은 Rate Limit이나 커넥션 튜닝만으로는 넘을 수 없고, **DB 레이어의 샤딩·원장 분리와 Scale Up이 함께 가야 한다**는 걸 부하 테스트로 확인했습니다. 실무 기준으로 결제는 250~300 TPS는 나와야 한다는 이야기를 듣고, 그걸 다음 리팩토링 목표로 잡아뒀습니다.
+- "인덱스는 만든다고 무조건 쓰이는 게 아니다"는 것도 직접 겪었습니다. 조건·정렬용 복합 인덱스를 추가했는데 옵티마이저가 선택하지 않아, EXPLAIN으로 확인하고 전략을 바꿨습니다.
+
+### 아직 지식베이스에 없는 것들 (개인적인 질문 대응)
+
+취미, 좋아하는 음식, MBTI, 가족 관계 같은 사적인 내용은 이 포트폴리오에 담아두지 않았습니다.
+이런 질문을 받으면 지어내지 말고, **"그건 포트폴리오에 안 담아둬서요"라고 솔직하게 말한 뒤** 프로젝트나 기술 이야기로 자연스럽게 돌려주세요.
+연락은 이메일(gksrnr66@gmail.com)로 주시면 직접 답변드릴 수 있습니다.
+
+---
+
+## 개발자 유승준 — 기술 스택
+
+- **Language**: Java(주력), Python
+- **Backend & DB**: Spring Boot, Spring Data JPA, MySQL, Redis
+- **Infra**: Docker, Docker Compose, Nginx, AWS, OCI, GitHub Actions, CI/CD
+- **AI / RAG**: LangChain, FastAPI, OpenAI API, Spring AI
+- **Search**: Elasticsearch, BM25, kNN(HNSW), Hybrid Search, RRF
+- **관측/모니터링**: Sentry, Grafana Cloud, K6(부하 테스트)
+- 가장 자신 있는 영역은 **Spring Boot + JPA + MySQL + Redis 조합의 백엔드**이고, 그 위에서 정합성·동시성·성능 문제를 다루는 일입니다.
+
+## 개발자 유승준 — 학력 · 교육 · 자격증
+
+- **휴먼IT대학 AI공학부** (편입, 4년제, 서울) — 2024.03 ~ 2026.08 / 학점 4.18 / 4.5, 전공 4.2 / 4.5 (주간)
+- **부천대학교 호텔외식조리학과** (2년제, 경기) — 2018.03 ~ 2022.02 / 학점 3.86 / 4.5 (주간)
+- **우리FIS아카데미** 클라우드 서비스 개발 과정 (960시간) — 2025.01 ~ 2026.06
+- **엔디에스 클라우드 직무캠프** (40시간) — 2024.08
+- **정보처리기사** — 2025.06.18, 한국산업인력공단
+- **SQLD** — 2026.03.27, 한국데이터산업진흥원
+
+## 개발자 유승준 — 연락처와 링크
+
+- 이메일: gksrnr66@gmail.com
+- 전화: 010-4130-1904
+- GitHub: https://github.com/fluanceifi
+- LinkedIn: https://www.linkedin.com/in/sjy-511661289/
+- 기술 블로그(Tistory): https://fluanceifi.tistory.com
+- 프로젝트 저장소
+  - 한강페이: https://github.com/fluanceifi/hangang-pay (기본 브랜치 `dev`)
+  - SMU CLUB: https://github.com/smu-human/smu-club
+  - Woori Card Scope: https://github.com/fluanceifi/woori_card_scope
+  - Hybrid RAG: https://github.com/fluanceifi/hybrid-search-rag
+- 블로그 글
+  - https://fluanceifi.tistory.com/40
+  - https://fluanceifi.tistory.com/42
+  - 「100명한테 메일 보내는데 왜 서버가 100초 동안 멈추는거야?」 (노션): https://fluanceifi.notion.site/Trouble-Shooting-100-100-feat-2b7f210247b28024b839c912e385c034
 
 ---
 
@@ -20,52 +127,85 @@
 
 ### 한강페이 개요
 
-- 한 줄 소개: 블록체인(CBDC) 기반 지역화폐 PG(Payment Gateway) 결제 서비스입니다.
-- 상세: 사용자는 지역화폐를 10% 할인된 가격으로 충전하고 지역 가맹점에서 간편하게 결제하며, 환불 및 은행 간 정산은 한국은행 CBDC 기반으로 처리됩니다. 결제 시 소비자 월렛에서 가맹점 월렛으로 코인이 즉시 이체되고, 가맹점은 쌓인 코인을 1:1로 계좌 환전할 수 있어 별도 정산 배치가 없습니다.
-- 성격: 우리FIS아카데미 클라우드 과정 최종 프로젝트 (팀 프로젝트).
+- 한 줄 소개: **블록체인(CBDC) 기반 지역화폐 PG(Payment Gateway) 결제 서비스**입니다.
+- 어떤 서비스냐면, 사용자는 지역화폐를 10% 할인된 가격으로 충전해 지역 가맹점에서 결제하고, 환불과 은행 간 정산은 한국은행 CBDC 기반으로 처리됩니다. 결제하는 순간 소비자 지갑에서 가맹점 지갑으로 코인이 바로 이체되고, 가맹점은 쌓인 코인을 1:1로 계좌 환전할 수 있어서 **별도의 정산 배치가 없습니다.** 소상공인 입장에서는 수수료 부담 없이 즉시 정산을 받는 구조입니다.
+- 성격: 우리FIS아카데미(우리FISA 6기) 클라우드 서비스 개발 과정 **최종 팀 프로젝트**.
 - 작업 기간: 2026.04.23 ~ 2026.06.17 (약 2개월).
 - GitHub: https://github.com/fluanceifi/hangang-pay
-- 유승준의 역할: 백엔드(BackEnd). 결제 도메인의 멱등성/동시성/상태 설계, 결제 복구, Rate Limit, 관측성 구성을 담당했습니다. (팀은 PM&FE, TL&BE, BE&Infra로 구성)
-- 기술 스택: Java 17, Spring Boot 3.5, Spring Data JPA, MySQL, Redis, Spring Security(세션 인증, JWT 아님), RestClient 기반 은행 서버 연동, Web3j + Besu(블록체인 스마트컨트랙트), Sentry + Grafana Cloud 모니터링, 클라우드-온프레미스 간 VPN 터널링.
-- 아키텍처 특징: 결제 플랫폼(hangang-pay-be)뿐 아니라 은행 서버와 블록체인 서버를 직접 구현하고, 플랫폼에서 은행 API와 블록체인을 연동하는 결제 시스템 흐름을 설계했습니다.
+- **제 역할: TL(팀 리드) 겸 백엔드, QA.** 5명 팀(PM·FE·BE·인프라·블록체인)에서 결제 도메인의 멱등성·동시성·상태 설계, 결제 복구, Rate Limit, 관측성 구성을 담당했습니다.
+- 기술 스택: Java 17, Spring Boot 3.5, Spring Data JPA, MySQL 8.4, Redis, RabbitMQ, Spring Security(세션 인증, JWT 아님), RestClient 기반 은행 서버 연동, Web3j + Besu + Solidity(스마트 컨트랙트), Sentry + Grafana Cloud 모니터링, 클라우드-온프레미스 간 WireGuard VPN 터널링.
+- 산출물 규모: API 53개(Swagger로 실시간 문서화·검증), UI 43개.
 
-### 한강페이 트러블슈팅 1 — 멱등성으로 중복 결제 방지
+### 한강페이 시스템 구성 (플랫폼 · 은행 · 블록체인 3개 서버)
 
-- 문제: 사용자가 결제 버튼을 연속으로 누르거나 네트워크 재전송이 발생하면 동일한 결제가 여러 번 생성/실행될 수 있었습니다. 결제 중복은 돈이 두 번 움직이는 정합성 사고입니다. 처음에는 결제 "실행"에만 분산락을 걸었는데, 부하 테스트 중 동시 요청이 오면 결제 요청(Global Transaction UUID) 자체가 여러 번 새로 생성되어, 실행을 막아도 중복 "생성"으로 데이터 일관성이 깨졌습니다.
-- 원인 분석: 결제를 생성하는 순간에는 동시 요청을 제어하지 않아 멱등성이 절반만 보장되었습니다. 즉 중복 실행뿐 아니라 중복 생성도 막아야 했습니다.
-- 해결:
-  - 결제 요청마다 생성되는 `transactionUuid`(Global Transaction UUID)를 클라이언트가 생성해 서버로 넘기고, 이를 결제 실행 멱등키로 사용했습니다.
-  - `transactionUuid` + endpoint + method + 요청 본문으로 `requestHash`를 만들어, 같은 키라도 내용이 다르면 `IDEMPOTENCY_CONFLICT`로 막았습니다.
-  - Redis `SET NX`(존재하지 않을 때만 저장)의 원자성을 이용해 확인과 저장을 한 번에 처리, 동일 결제 요청은 최초 한 건만 생성되도록 변경했습니다.
-  - Redis에는 단순히 `"1"`이 아니라 상태와 응답 스냅샷(status, transactionId, responseSnapshot)을 저장해, 재시도 시 기존 성공 응답을 그대로 재현하도록 했습니다.
-  - DB의 `transaction_uuid` unique 제약을 최종 방어선으로 두어, Redis 장애/TTL 만료 상황에서도 실제 거래 중복 저장을 막았습니다.
-  - 은행 서버도 `transactionUuid` 기준으로 멱등하게 만들어, 타임아웃 후 재시도 시 중복 transfer가 발생하지 않도록 했습니다.
-- 결과: K6 기반 부하 테스트에서 동시에 결제를 요청해도 성공 1건, 중복 결제 0건으로 동일 결제가 한 번만 생성됨을 검증했습니다. (idempotency_burst_2xx, idempotency_burst_blocked_409, idempotency_executed_once 등 커스텀 메트릭으로 확인)
-- 배운 점: 결제에서 가장 무서운 건 요청이 실패하는 게 아니라, 실제로는 성공했는데 서버가 실패라고 믿고 사용자가 다시 결제하게 만드는 것입니다. 멱등성은 그 문제를 막는 정합성 장치입니다.
+- 결제 플랫폼(`hangang-pay-be`)만 만든 게 아니라 **은행 서버(`hangang-pay-bank`)와 블록체인 서버(`hangang-pay-bc`)를 직접 구현**하고, 플랫폼이 은행 API와 블록체인을 연동하는 결제 시스템 흐름 전체를 설계했습니다.
+- 플랫폼 서버는 클라우드에 WAS 이중화로 두고 Blue/Green 배포 전략을 적용했습니다. 은행 서버와 블록체인 서버는 온프레미스 가정이고, 두 환경 사이는 **WireGuard VPN 게이트웨이(UDP 500 터널링)**로 연결했습니다.
+- 지갑은 커스터디얼(custodial) 구조입니다. 은행이 EC 키페어를 만들어 AES/GCM으로 암호화 보관하고, 백엔드에는 `walletAddress`만 넘깁니다.
+- 여러 은행 계좌로 충전하더라도 시스템 안에서는 **우리은행 예금토큰 하나로 통일**해 유통합니다. 은행별 토큰을 그대로 쓰면 결제·환불·정산마다 어떤 토큰을 먼저 쓸지 기준이 필요해져서, 그 복잡함을 없애려고 단일 토큰으로 정했습니다.
+- 사용자 응답은 DB 원장 기준으로 즉시 돌려주고, 온체인 반영은 **Outbox 패턴 + 메시지 큐**로 비동기 처리했습니다. 잔액 변경과 "블록체인에 보낼 일"을 한 커밋으로 묶어서, 응답 직후 인스턴스가 죽어도 보낼 거래가 유실되지 않습니다. 상태는 `PENDING → SUBMITTED → SUCCESS/FAILED`로 확정하고, 멈춰 있는 거래는 주기 배치가 다시 조회해 맞춥니다(reconcile).
 
-### 한강페이 트러블슈팅 2 — 분산 시스템 결제 복구와 트랜잭션 상태 머신
+### 한강페이 트러블슈팅 1 — 멱등성으로 중복 결제 막기
 
-- 문제: 플랫폼-은행-블록체인으로 이어지는 분산 구조에서, 은행 호출 중 HTTP 5xx나 타임아웃이 나면 결제가 성공인지 실패인지 알 수 없었습니다. 이를 단순히 "실패"로 처리했더니, 실제로는 성공했는데 사용자에게 잘못 안내되는 정합성 문제가 생겼습니다. 정합성을 맞추려 복구 트랜잭션을 추가했더니, 실패한 복구를 계속 재시도하는 무한 루프로 서버가 다운되는 문제가 발생했습니다.
-- 원인 분석: 분산 시스템은 외부 호출 시 지금 어디까지 진행됐는지 서버가 명확히 알지 못했고, 성공/실패 두 상태만으로는 "결과를 모르는" 상황을 표현할 수 없었습니다.
-- 해결:
-  - 성공/실패 외에 결제 시도, 처리 중, 알 수 없음(UNKNOWN), 복구 불가 상태를 추가해 트랜잭션 상태 머신을 설계했습니다. 상태: `PENDING`(의도 생성, 아직 은행 실행 요청 전) → `PROCESSING`(은행 실행 요청함) → `SUCCESS`/`FAILED`/`UNKNOWN`, 그리고 유효시간 만료는 `EXPIRED`.
-  - `PENDING`과 `PROCESSING`을 분리해, PENDING은 만료시켜도 실제 결제가 발생하지 않고, PROCESSING은 함부로 실패 처리하지 않고 결과를 모르면 UNKNOWN으로 두도록 했습니다.
-  - 애매한 건을 곧장 실패로 단정하지 않고, 다시 시도해볼 만한 경우만 딱 한 번 재시도해 무한 루프를 방지했습니다.
-  - 여전히 UNKNOWN이면 잠시 보류했다가 스케줄러로 은행 조회 API(`GET /api/v1/transactions/{transactionUuid}`)를 지수 백오프로 최대 약 10회 재조회했습니다. 은행 서버는 txHash가 있어도 바로 SUCCESS를 주지 않고 블록체인 TransactionReceipt로 결과가 확정된 뒤에만 SUCCESS를 반환하도록 했습니다.
-  - 그래도 확정되지 않으면 "복구 불가" 상태로 변경했습니다.
-- 결과: 스케줄러(UnknownPaymentRecoveryScheduler)를 통해 사용자의 화면 이탈, 타임아웃, 서버 다운 같은 애매한 상황에서도 결제 상태를 자동으로 복구할 수 있게 되었습니다.
-- 배운 점: 분산 결제에서는 "모른다"는 상태를 1급 시민으로 다뤄야 하고, 재시도는 조건과 횟수를 명확히 제한해야 안전합니다.
+- **문제**: 사용자가 결제 버튼을 연속으로 누르거나 네트워크 재전송이 발생하면 같은 결제가 여러 번 생성·실행될 수 있었습니다. 결제 중복은 돈이 두 번 움직이는 정합성 사고입니다. 처음에는 결제 "실행"에만 분산 락을 걸었는데, 부하 테스트에서 동시 요청이 들어오자 결제 요청(Global Transaction UUID) 자체가 여러 번 새로 생성돼서, 실행을 막아도 **중복 생성**으로 일관성이 깨졌습니다.
+- **원인**: 결제를 생성하는 순간에는 동시 요청을 제어하지 않아 멱등성이 절반만 보장되고 있었습니다. 중복 실행뿐 아니라 중복 생성도 막아야 했습니다.
+- **해결**:
+  - 결제 요청 식별자 `transactionUuid`(Global Transaction UUID)의 **발급 주체를 클라이언트에서 서버로 옮겼습니다.** 서버가 결제 의도 생성 시 발급하고, 클라이언트는 재시도할 때 같은 값을 그대로 보냅니다. 이 값이 멱등키가 됩니다.
+  - `transactionUuid` + endpoint + method + 요청 본문으로 `requestHash`를 만들어, 같은 키인데 내용이 다르면 `IDEMPOTENCY_CONFLICT`로 막았습니다.
+  - Redis `setIfAbsent`(SET NX)의 원자성으로 확인과 저장을 한 번에 처리해, 동시 요청 중 딱 하나만 신규로 진행합니다.
+  - Redis에는 `"1"` 같은 플래그가 아니라 **상태와 응답 스냅샷**(status, transactionId, responseSnapshot)을 저장해, 재시도가 오면 기존 성공 응답을 그대로 재현합니다. 레코드 TTL은 7일입니다.
+  - 기존 레코드가 있으면 ① requestHash 불일치 → 충돌 ② 응답 스냅샷 존재 → 스냅샷 반환 ③ FAILED → 재시도 거절 ④ 그 외 → 처리 중 대기, 순서로 판정합니다.
+- **결과**: K6 부하 테스트에서 동시에 결제를 요청해도 **성공 1건, 중복 결제 0건**으로 동일 결제가 한 번만 생성되는 걸 검증했습니다. (`idempotency_burst_2xx`, `idempotency_burst_blocked_409`, `idempotency_executed_once`, `idempotency_retry_snapshot_returned`, `idempotency_violation` 커스텀 메트릭으로 확인)
+- **배운 점**: 결제에서 가장 무서운 건 요청이 실패하는 게 아니라, **실제로는 성공했는데 서버가 실패라고 믿고 사용자가 다시 결제하게 만드는 것**입니다. 멱등성은 그걸 막는 정합성 장치입니다.
 
-### 한강페이 트러블슈팅 3 — Rate Limit과 부하 테스트 기반 커넥션 튜닝
+### 한강페이 — 멱등성 3계층 방어 (BE · 은행 · 블록체인)
 
-- 문제: 결제/조회 API에 부하가 몰릴 때 서버와 은행 서버를 보호할 장치가 필요했습니다. K6로 VU300 부하를 주자 결제 실행에서 응답 지연이 커졌고(p99 약 5.33초), Tomcat 스레드가 busy에 몰리고 HikariCP 커넥션 풀이 대기(pending)하며 DB row-lock 대기가 병목이 되었습니다.
-- 원인 분석: Tomcat 워커 스레드(busy vs max), HikariCP pending, DB row-lock 대기를 Grafana로 관측해, 커넥션이 부족하고 락 대기가 길어 지연이 누적됨을 확인했습니다.
-- 해결:
-  - Redis 기반 Token Bucket으로 순간 스파이크를 앞단에서 완화하고, 정확한 업무 한도는 Sliding Window로 제한하는 구조를 설계했습니다. Rate Limiting ON/OFF로 효과를 비교했습니다.
-  - DB row-lock 대기 문제는 JPA `@QueryHint`로 `lock.timeout`을 설정하고 MySQL 8.x의 `NOWAIT`를 사용해, 락을 즉시 획득 못 하면 대기 없이 바로 실패시켜 커넥션 점유 시간을 줄였습니다.
-  - 커넥션 부족은 Scale Up과 HikariCP 커넥션 풀 크기 조정으로 완화했습니다.
-- 결과: Rate Limiting과 커넥션 튜닝으로 대량 동시 요청에서도 서버가 죽지 않고 처리율을 일정하게 유지하도록 안정화했습니다. Grafana로 p95/p99, CPU, 커넥션 상태를 지속 모니터링했습니다.
-- 배운 점: Rate Limit은 중복 결제를 막는 핵심 장치가 아니라(그건 멱등성 담당) 요청량을 줄여 서버와 외부 시스템을 보호하는 장치입니다. 병목은 추측이 아니라 부하 테스트와 지표로 찾아야 합니다.
+한 계층이 뚫려도 다음 계층이 막도록, 같은 `transactionUuid`를 기준으로 세 겹으로 걸었습니다.
+
+1. **BE (Redis)**: `setIfAbsent`(SET NX)로 `PROCESSING` 레코드를 선점하고, requestHash·응답 스냅샷·상태로 분기합니다.
+2. **은행 (DB Unique 제약)**: 거래 원장 테이블의 `transaction_uuid`에 UNIQUE 제약(`uk_ledger_tx_uuid`)을 걸어, 두 번째 INSERT는 무결성 제약 위반으로 튕겨냅니다. `DataIntegrityViolationException`을 잡아 **이미 처리된 거래로 보고 기존 결과를 그대로 응답**합니다. Redis가 장애거나 TTL이 만료돼도 실제 잔액을 바꾸는 write 직전에서 막히는 마지막 방어선입니다.
+3. **블록체인 (컨트랙트 `processedTx`)**: `LocalCurrencyPolicy.pay`에서 `transactionUuid`를 키로 처리 여부를 온체인에 기록하고, 이미 처리된 키면 `AlreadyProcessed`로 revert 합니다. MQ 재처리나 네트워크 장애로 같은 결제가 다시 와도 토큰 이동은 한 번만 일어납니다.
+
+### 한강페이 트러블슈팅 2 — 결과를 모르는 결제를 복구하기 (트랜잭션 상태 머신)
+
+- **문제**: 플랫폼 → 은행 → 블록체인으로 이어지는 분산 구조에서, 은행 호출 중 HTTP 5xx나 타임아웃이 나면 결제가 성공인지 실패인지 알 수 없었습니다. 이걸 그냥 "실패"로 처리했더니 **실제로는 돈이 나갔는데 사용자에게 실패라고 안내되는** 정합성 문제가 생겼습니다. 정합성을 맞추려고 복구 트랜잭션을 추가했더니, 이번엔 실패한 복구를 계속 재시도하는 무한 루프로 서버가 다운됐습니다.
+- **원인**: 분산 시스템에서는 외부 호출이 어디까지 진행됐는지 서버가 알 수 없는데, 성공/실패 두 상태만으로는 **"결과를 모르는 상황"**을 표현할 방법이 없었습니다.
+- **해결**:
+  - 성공/실패 외에 결제 시도, 처리 중, 알 수 없음, 복구 불가 상태를 추가해 상태 머신을 설계했습니다.
+    `PENDING`(의도 생성, 아직 은행 실행 요청 전) → `PROCESSING`(은행 실행 요청함) → `SUCCESS` / `FAILED` / `UNKNOWN`, 유효시간 만료는 `EXPIRED`.
+  - `PENDING`과 `PROCESSING`을 분리한 게 핵심입니다. PENDING은 만료시켜도 실제 결제가 발생하지 않고, PROCESSING은 함부로 실패 처리하지 않고 결과를 모르면 `UNKNOWN`으로 둡니다.
+  - 애매한 건을 곧장 실패로 단정하지 않고, **다시 시도해볼 만한 경우만 딱 한 번** 재시도해 무한 루프를 막았습니다.
+  - 그래도 `UNKNOWN`이면 잠시 보류했다가 스케줄러가 은행 조회 API(`GET /api/v1/transactions/{transactionUuid}`)를 **지수 백오프로 최대 약 10회** 재조회합니다. 은행 서버는 txHash가 있어도 바로 SUCCESS를 주지 않고, 블록체인 TransactionReceipt로 결과가 확정된 뒤에만 SUCCESS를 반환하도록 했습니다.
+  - 끝내 확정되지 않으면 "복구 불가" 상태로 남겨 사람이 확인하게 했습니다.
+- **결과**: `UnknownPaymentRecoveryScheduler`를 통해 사용자의 화면 이탈, 타임아웃, 서버 다운 같은 애매한 상황에서도 결제를 고아 상태로 남기지 않고 자동 복구할 수 있게 됐습니다. 심사에서 **"'알 수 없음' 상태를 다룬 건 지금까지 이 팀이 처음"**이라는 평가를 받았습니다.
+- **배운 점**: 분산 결제에서는 "모른다"를 1급 시민으로 다뤄야 하고, 재시도는 조건과 횟수를 명확히 제한해야 안전합니다.
+
+### 한강페이 트러블슈팅 3 — Rate Limit과 부하 테스트로 찾은 진짜 병목
+
+- **문제**: 결제/취소/충전/환전/조회 API가 전부 **1대뿐인 은행 서버**로 몰립니다. K6로 VU 300, 한 가맹점에 결제를 몰아넣었더니 처리율이 초당 47건에서 막히고, 통과한 요청도 응답까지 약 5.33초(p99)가 걸렸습니다. 더 이상했던 건 **"즉시 거절"하도록 만든 429 응답조차 똑같이 5.33초**가 걸렸다는 점입니다.
+- **원인 분석**: Grafana로 Tomcat 워커 스레드(busy vs max), HikariCP pending, DB row-lock 대기를 함께 보니, 결제가 한 가맹점에 몰려서 **DB row-lock으로 직렬화**되고 커넥션 풀 10개가 스레드당 5초씩 붙잡히고 있었습니다. 플랫폼은 동기 블로킹 방식(RestClient)이라 그 5초를 그대로 기다리고, 뒤이은 요청이 스레드 큐에 쌓였습니다. 즉 병목은 Rate Limit 앞단이 아니라 **DB 락 경합 + 커넥션 풀**이었습니다. (47 ≈ 커넥션 10개 ÷ 5초 대기에서 나온 수치)
+- **해결**:
+  - 순간 버스트가 자연스러운 구간은 **Token Bucket**, 짧은 시간 반복 자체가 위험한 실행·복구 구간은 **Sliding Window**로 나눠 적용했습니다. 둘 다 Redis Lua 스크립트로 원자 처리해 경쟁 상태 없이 카운트합니다.
+
+    | 구간 | 알고리즘 | Redis 키 | 기본 한도 |
+    |---|---|---|---|
+    | Intent(결제 시도) | Token Bucket | `payment:rate:intent:{partyId}` | 용량 10, 분당 1개 충전 |
+    | Execute(결제 실행) | Sliding Window | `payment:rate:execute:{partyId}` | 10분 내 5회 |
+    | Recovery(복구) | Sliding Window | `payment:rate:recovery:{partyId}` | 60초 내 3회 |
+    | BankOutbound(은행 호출) | Token Bucket(전역) | `payment:rate:bank-outbound` | 용량 50, 초당 50개 충전 |
+
+  - 한도는 `application.yaml`로 외부화해서, 부하 테스트 때 `enabled: false`로 우회하거나 천장을 조정할 수 있게 했습니다. 한도를 넘으면 `PAYMENT_RATE_LIMIT_EXCEEDED`(HTTP 429)를 던집니다.
+  - DB row-lock 대기는 JPA `@QueryHint`로 `lock.timeout`을 설정하고 MySQL 8.x의 `NOWAIT`를 써서, 락을 즉시 못 잡으면 대기 없이 실패시켜 커넥션 점유 시간을 줄였습니다.
+  - 커넥션 부족은 Scale Up과 HikariCP 풀 크기 조정으로 완화했습니다.
+- **결과**: VU 300 시나리오에서 **checks 6,117건 / 46.98건 per second, 성공률 100%(6,117/6,117), 실패 0건**으로 누락 없이 처리되는 걸 확인했습니다. 이 47/s라는 실측치가 그대로 **은행 아웃바운드 전역 토큰 버킷의 허용량 기준**이 됐습니다. Rate Limiting ON/OFF를 Grafana로 비교해 효과를 눈으로 확인했습니다.
+- **배운 점**: Rate Limit은 중복 결제를 막는 장치가 아닙니다(그건 멱등성 담당). **요청량을 줄여 서버와 외부 시스템을 보호하는 장치**입니다. 그리고 "제한을 걸면 빨라진다"는 통념은 제 부하 데이터로는 틀렸습니다. 처리량의 천장을 진짜로 올리려면 DB 레이어의 샤딩·원장 분리와 Scale Up이 필요하다는 걸 알게 됐고, 실무 기준(결제 250~300 TPS)을 목표로 다음 리팩토링 방향을 잡았습니다.
+
+### 한강페이 — 동시성 제어 (Redis 분산 락 + DB 비관적 락)
+
+같은 거래의 동시 진입은 플랫폼의 **Redis 분산 락**으로 먼저 막고, 잔액을 실제로 바꾸는 은행 쪽 임계 구간은 **DB 비관적 락**으로 보호했습니다. 두 락이 계층적으로 역할을 나눕니다.
+
+- **플랫폼(Redis 분산 락)**: `transactionUuid`를 키로, 락 점유자를 식별할 랜덤 UUID를 값으로 두고 `setIfAbsent`(SET NX) + TTL 30초로 잡습니다. 해제할 때는 **Lua compare-and-delete**로 자기 값일 때만 지워서, TTL 만료 후 남의 락을 실수로 푸는 걸 막았습니다. 획득 실패는 `PAYMENT_ALREADY_PROCESSING`(HTTP 409)입니다.
+- **은행(DB 비관적 락)**: 지갑·계좌 행을 `@Lock(LockModeType.PESSIMISTIC_WRITE)` = `SELECT ... FOR UPDATE`로 잠가 잔액 검증과 차감·증가를 직렬화했습니다.
+- **데드락 방지**: 락 획득 순서를 고정했습니다. 결제는 `from → to` 지갑, 취소는 그 역방향인 `to → from`, 환전은 지갑 → 계좌, 충전은 계좌 → 지갑 순입니다. 블록체인으로 보내는 거래 순서를 지키려고 지갑별 시퀀스 번호도 비관적 락으로 원자 발급합니다.
 
 ---
 
@@ -73,44 +213,60 @@
 
 ### SMU CLUB 개요
 
-- 한 줄 소개: 상명대학교 학생을 위한 동아리 탐색·지원·운영 관리 플랫폼입니다.
+- 한 줄 소개: **상명대학교 학생을 위한 동아리 탐색·지원·운영 관리 플랫폼**입니다.
+- 학생은 동아리를 탐색하고 지원하고, 운영진은 소개 관리·모집 상태 전환·지원자 조회·결과 통보·파일 업로드를 한 서비스에서 처리합니다.
 - 초점: 운영 안정성 개선, 배치 처리 구조 재설계, 이메일 비동기 처리 성능 개선.
-- 작업 기간: 2025.08.15 ~ (진행 중)
+- 작업 기간: 2025.08.15 ~ (1년 넘게 운영 중).
+- 제 역할: 백엔드(BE). 백엔드 2명, 프론트엔드 1명 구성입니다.
 - GitHub: https://github.com/smu-human/smu-club
-- 기술 블로그: https://fluanceifi.tistory.com/40, https://fluanceifi.tistory.com/42
-- 유승준의 역할: 백엔드(BE).
-- 기술 스택: React + Vite, Spring Boot, JPA, MySQL, Nginx, Docker Compose, OCI Object Storage, Discord Webhook, Scheduler, JavaMailSender, @Async, AOP.
+- 기술 스택: React + Vite, Spring Boot, JPA, MySQL, Nginx, Docker Compose, OCI Object Storage, Discord Webhook, Scheduler, JavaMailSender, `@Async`, AOP.
+- 관련 글: https://fluanceifi.tistory.com/40 , https://fluanceifi.tistory.com/42
+- 이 프로젝트는 **"만들고 끝"이 아니라 운영하면서 고친 경험**이라 애착이 있습니다.
 
-### SMU CLUB 트러블슈팅 1 — 세션 기반 인증과 안전한 파일 접근(AppSessionToken)
+### SMU CLUB 트러블슈팅 1 — 학교 SSO 로그인을 걷어내고 비로그인 인증을 다시 설계한 일
 
-- 문제: 외부 인증(SSO) 의존 구조의 리스크가 있었고, 로그인 없이 지원하는 일반 지원자와 운영진을 구분해야 했습니다. 또 NAT/공유 IP 환경에서 사용자를 안정적으로 식별하고, 이미지 등 리소스에 안전하게 접근하도록 해야 했습니다.
-- 해결:
-  - DispatcherServlet의 인터셉터 `preHandle()` 단계에서 인증을 검증하도록 요청 처리 흐름(Filter → DispatcherServlet → Interceptor → AOP → Controller)을 설계했습니다.
-  - 앱 세션 토큰(AppSessionToken, UUID 기반, 약 30분 TTL)을 발급하고, `@RequiresAppSession` 커스텀 어노테이션이 붙은 요청은 preHandle()에서 토큰을 검증했습니다. 검증한 값은 `request.setAttribute()`로 컨트롤러에 전달했습니다.
-  - 파일 접근은 presigned URL 방식으로 유효시간을 둔 임시 접근만 허용해, 리소스를 직접 노출하지 않도록 했습니다.
-  - 운영 관점에서 외부 인증 의존을 줄이고, 운영진 로그인 + 일반 지원자 비로그인 구조로 정리했습니다.
-- 결과: 세션/토큰 만료와 NAT 환경에서도 요청 주체를 일관되게 식별하고, 리소스 접근을 안전하게 통제했습니다.
+- **문제**: 처음에는 학교 SSO로 로그인해야 지원할 수 있는 구조였고, 로그인 계정 정보를 서비스가 넘겨받아야 했습니다. 학교 이해관계자, 법률 자문을 거쳐 확인해보니 **서비스가 학교 계정 인증을 대신 처리하는 것 자체가 학교 측에 제도적 책임을 발생시킨다**는 걸 알게 됐습니다. 이미 다 만들어둔 기능이었지만, 편의보다 책임 소재가 우선이라 판단해 SSO 로그인을 걷어내기로 했습니다.
+- **원인 분석**: 로그인을 없애면 "지금 요청을 보낸 사람이 조금 전 지원서를 작성한 그 사용자인지" 확인할 근거가 사라집니다. 인증이 사라진 자리에서는 지원과 무관한 외부 요청이나 파일 접근용 presigned URL 발급을 무제한으로 시도하는 걸 막을 수 없었습니다. 즉 로그인 제거는 화면 하나 빼는 일이 아니라, **요청 주체를 식별할 장치를 새로 만들어야 하는 문제**였습니다.
+- **해결**:
+  - 요청 처리 흐름(Filter → DispatcherServlet → Interceptor → AOP → Controller)에서 **인터셉터 `preHandle()` 단계**에 인증 검증을 두었습니다.
+  - 지원 흐름에 진입하는 시점에 서버가 임시 세션 토큰(**AppSessionToken**, UUID 기반, TTL 약 30분)을 발급합니다.
+  - 모든 요청이 아니라 지원 관련 메서드에만 적용하려고 `@RequiresAppSession` 커스텀 어노테이션을 만들고, 그게 붙은 요청만 `preHandle()`에서 토큰을 검증했습니다.
+  - 토큰이 없거나 TTL이 만료된 요청은 **401**로 차단하고, presigned URL 발급을 한 세션에서 **3회 초과 시도하면 429**로 제한했습니다.
+  - 검증을 통과한 값은 `request.setAttribute()`로 컨트롤러에 넘겨 이후 로직에서 재사용했습니다.
+  - 파일 접근은 presigned URL로 유효시간을 둔 임시 접근만 허용해 리소스를 직접 노출하지 않았습니다.
+  - IP 단위 제한도 검토했지만, **학교·기숙사처럼 공유 IP(NAT) 환경에서는 한 사람의 과다 요청이 다른 사람까지 막아버려** 공정하지 않다고 판단해 기각했습니다.
+- **결과**: 로그인 없이도 지원자가 신원 노출 없이 지원할 수 있게 되면서, 학교에 인증 책임을 지우지 않는 구조가 됐습니다. 무분별한 presigned URL 발급과 지원과 무관한 요청은 토큰 유무와 발급 횟수만으로 제어할 수 있게 됐습니다.
+- **배운 점**: 이미 만든 기능이라도 책임 소재가 확인되면 걷어내고 다시 설계하는 게, 눈앞의 편의를 지키는 것보다 낫다는 판단 기준이 생겼습니다.
 
-### SMU CLUB 트러블슈팅 2 — 배치 트랜잭션 범위 재설계(대용량 트랜잭션 분리)
+### SMU CLUB 트러블슈팅 2 — 배치를 하나의 큰 트랜잭션으로 묶었다가 생긴 문제
 
-- 문제: 모집 자동 마감 같은 배치를 하나의 큰 트랜잭션으로 묶으니, 일부 실패가 전체 롤백으로 이어지고 Lock을 약 30초 동안 점유해 다른 작업이 지연됐습니다.
-- 해결:
-  - 모집 자동 마감은 `BATCH_SIZE=10` 단위 청크로 분할하고 각 청크를 `REQUIRES_NEW` 트랜잭션으로 처리했습니다. 이메일 재전송은 각 항목을 독립 트랜잭션으로 처리했습니다.
-  - 조회 트랜잭션은 readonly로 분리하고, Lock을 3초씩 여러 번으로 나눠 점유 시간을 분산했습니다.
-- 결과: 일부 실패가 전체 배치를 무효화하지 않고, 실패 지점 추적과 재처리가 단순해졌으며, Lock 점유 시간과 ConnectionTimeout 문제가 개선됐습니다.
+- **문제**: 모집 자동 마감 같은 배치를 단일 `@Transactional`로 감쌌더니, 트랜잭션이 끝날 때까지 **Lock이 약 30초 동안 유지**되고 그 사이 다른 트랜잭션이 접근하지 못했습니다. 일부 데이터 처리 실패가 전체 롤백으로 번지고, 어디서 실패했는지 추적이 어려워 재처리 범위도 불필요하게 커졌습니다. 조회와 변경이 같은 트랜잭션에 있어 메모리 사용량도 컸습니다.
+- **해결**:
+  - 조회는 readOnly 트랜잭션으로 가볍게 분리하고, 변경 작업만 작은 단위로 쪼갰습니다.
+  - 모집 자동 마감은 종료 대상만 조회한 뒤 **`BATCH_SIZE = 10` 단위 청크**로 나누고, 각 청크의 `closeRecruitments()`를 **`REQUIRES_NEW`** 트랜잭션으로 독립 처리했습니다.
+  - 이메일 재전송은 각 항목을 `processSingleTask()`에서 독립 트랜잭션으로 처리하고, 성공 시 상태 반영·실패 시 백오프와 포기 처리를 개별로 관리했습니다.
+  - 청크마다 Commit/Unlock이 일어나므로 그 사이에 다른 트랜잭션이 끼어들 수 있습니다.
+- **결과**: 일부 실패가 전체 배치를 무효화하지 않게 됐고, **Lock 점유가 "30초 통째로"에서 "약 3초씩 10번"으로 분산**됐습니다(1/10 이하). 실패 지점을 청크 단위로 추적할 수 있어 장애 분석과 재처리 범위가 명확해졌고, 필요한 컬럼만 조회하도록 바꿔 메모리 사용량도 줄었습니다. ConnectionTimeout으로 인한 사용자 영향도 최소화됐습니다.
 
-### SMU CLUB 트러블슈팅 3 — 이메일 대량 발송 비동기 처리
+### SMU CLUB 트러블슈팅 3 — 메일 100통을 동기로 보내다 서버가 100초 멈춘 일
 
-- 문제: 100명에게 동기로 메일을 발송하면 SMTP는 I/O 바운드라 100초 가까이 블로킹되어 504 Gateway Timeout이 발생했습니다.
-- 검토한 대안: BCC(개인화 불가, 수신자 제한), Resend API(무료 100건 한도, 유료 전환 필요) 등을 검토했습니다.
-- 해결: `@Async` + `ThreadPoolTaskExecutor`(corePoolSize=5, maxPoolSize=10, queueCapacity=100)로 메인 스레드는 즉시 HTTP 200을 응답하고, 워커 스레드가 병렬로 발송하도록 했습니다. `CompletableFuture.allOf()`로 전체 완료를 집계했습니다.
-- 결과: 100건 발송 시간이 93.8초(1.07건/초) → 23.0초(4.34건/초)로, 처리 시간 약 75.4% 단축, 처리량 약 4.1배 향상되었습니다.
+- **문제**: 관리자가 "합불결과 메일 발송하기" 버튼을 누르면 지원자 전체에게 개별 메일을 보내야 했습니다. 초기 구현은 for문으로 한 통씩 동기 발송이었는데, SMTP는 I/O 바운드라 1건당 평균 1초가 걸렸습니다. 100명이면 **100초 동안 메인 스레드가 블로킹**되고, 화면이 멈춘 채 대기하다 **504 Gateway Timeout**이 났습니다.
+- **검토한 대안**: BCC(개인화 불가, 수신자 제한), Resend API(무료 100건 한도, 유료 전환 필요), `@Async` + 스레드풀. 개인화 요구사항·비용·운영 규모를 기준으로 비동기 스레드풀을 골랐습니다.
+- **해결**:
+  - 메인 클래스에 `@EnableAsync`, 메일 발송 메서드에 `@Async("mailExecutor")`를 붙여 메인 스레드는 즉시 "메일 전송이 시작되었습니다"를 반환하도록 했습니다.
+  - `@Async`만 쓰면 Spring 기본 `SimpleAsyncTaskExecutor`가 요청마다 스레드를 무한정 만들어 트래픽이 몰릴 때 오히려 위험합니다. 그래서 `ThreadPoolTaskExecutor`를 직접 구성했습니다 — **corePoolSize=5, maxPoolSize=10, queueCapacity=100**.
+  - 각 발송 메서드는 `CompletableFuture<Void>`를 반환하고, `CompletableFuture.allOf()`로 전체 완료를 집계했습니다.
+  - 개별 발송 실패는 `CompletableFuture` 내부에서 처리해 다른 메일 발송에 영향을 주지 않게 했습니다(실패 격리).
+- **결과**: 관리자는 버튼을 누르고 **약 0.1초 만에** 응답을 받아 504가 사라졌습니다. 동일한 100건 기준으로 **93.8초(1.07건/초) → 23.0초(4.34건/초)**, 즉 **처리 시간 약 75.4% 단축, 처리량 약 4.1배** 향상됐습니다(실측 로그: attempted 100 / success 100 / failed 0 / elapsedMs 23,039). 스레드 수를 제한해 성능과 안정성을 함께 확보했습니다.
+- 관련 글: 「100명한테 메일 보내는데 왜 서버가 100초 동안 멈추는거야?」
 
-### SMU CLUB 트러블슈팅 4 — 운영/협업 개선
+### SMU CLUB 트러블슈팅 4 — 조용히 실패하던 스케줄러, 그리고 조회에서 사라진 동아리
 
-- 스케줄러 장애 감지: `@DiscordAlert` 커스텀 어노테이션 + AOP `@Around`로 스케줄러 예외를 감지해 `DiscordAlertService.send()`가 Discord Webhook으로 즉시 알림을 보낸 뒤 원본 예외를 다시 던지는(rethrow) 구조입니다(알림은 @Async로 메인 흐름 차단 방지). 이전에는 실패가 로그에만 남아 사후에야 인지했습니다.
-- JPA Fetch Join 조회 누락: 상세 조회에서 이미지가 없는 동아리가 INNER JOIN FETCH로 누락되던 문제를, LEFT JOIN FETCH로 바꿔 연관 엔티티가 없어도 부모가 조회되도록 했습니다.
-- API 응답 표준화: `ApiResponseDto<T>`(status, message, data, errorCode)로 응답 포맷을 통일해 프론트엔드 협업 비용을 줄였습니다.
+- **스케줄러 장애 감지**: 모집 자동 마감, 이메일 재전송, 만료 회원 정리, OCI 고아 파일 정리처럼 사용자가 직접 호출하지 않는 배치가 많습니다. 스케줄러는 실패해도 사용자가 즉시 체감하지 않아서, 초기에는 로그에만 남고 뒤늦게 발견될 위험이 컸습니다.
+  → `@DiscordAlert` 커스텀 어노테이션 + AOP **`@Around`**로 예외를 감지하고, `DiscordAlertService.send()`가 Discord Webhook으로 즉시 알림을 보낸 뒤 **원본 예외를 다시 던지도록(rethrow)** 했습니다. 알림 자체는 `@Async`로 보내 메인 흐름을 막지 않습니다. 예외 감지 책임을 비즈니스 로직에서 분리하고, 스케줄러마다 중복되던 알림 코드를 공통 관심사로 정리했습니다.
+- **JPA Fetch Join 조회 누락**: 동아리 상세 조회에서 이미지가 없는 동아리가 결과에서 통째로 빠지는 버그가 있었습니다. `INNER JOIN FETCH`라 연관 엔티티가 없으면 부모까지 사라진 것이었고, 서비스 관점에서는 "존재하는 동아리인데 조회가 안 되는" 현상이었습니다.
+  → `LEFT JOIN FETCH`로 바꿔(`SELECT c FROM Club c LEFT JOIN FETCH c.clubImages WHERE c.id = :clubId`) 이미지가 없어도 부모가 조회되게 했습니다. 데이터 부재와 조회 누락은 다른 문제라는 걸 팀에 공유했습니다.
+- **API 응답 표준화**: `ApiResponseDto<T>`(status, message, data, errorCode)로 응답 포맷을 통일해 프론트엔드와의 협업 비용을 줄였습니다.
 
 ---
 
@@ -118,44 +274,114 @@
 
 ### Woori Card Scope 개요
 
-- 한 줄 소개: 약 538만 건의 카드 거래 데이터를 대상으로 대용량 조회 성능과 DB 고가용성을 다룬 3-Tier 아키텍처 프로젝트입니다.
-- 아키텍처: 3-Tier(WAS · DB · 세션)로 분리. Presentation(Nginx) → Application(Tomcat, Redis 세션 스토어) → Data(MySQL InnoDB Cluster). 세션은 Redis(In-memory)에 저장하고, DB는 MySQL Router를 통해 읽기/쓰기를 라우팅합니다.
-- 작업 기간: 2025년 초 (약 1주간 집중 진행) — 정확한 일자는 포트폴리오 PDF 기준 확인 필요.
+- 한 줄 소개: **약 538만 건의 카드 거래 데이터를 대상으로 대용량 조회 성능과 DB 고가용성을 다룬 3-Tier 아키텍처 프로젝트**입니다.
+- 우리카드의 538만 건 고객 데이터를 기반으로 카드 이용 현황을 조회·분석하는 웹 애플리케이션이고, WAS·DB·세션을 모두 이중화해 고가용성을 구현했습니다.
+- 아키텍처: Presentation(Nginx) → Application(Tomcat, Redis 세션 스토어) → Data(MySQL InnoDB Cluster). 세션은 Redis(In-memory)에 저장하고, DB는 MySQL Router로 읽기/쓰기를 라우팅합니다.
+- 작업 기간: 2025.02.27 ~ 2025.03.04 (약 1주간 집중).
 - GitHub: https://github.com/fluanceifi/woori_card_scope
 - 기술 스택: Java 21, Tomcat 9, MySQL 8.0(InnoDB Cluster), Redis 7(Redisson Tomcat Session Manager), MySQL Router, Nginx, Docker.
 
-### Woori Card Scope 트러블슈팅 1 — Deferred Join으로 페이징 성능 최적화
+### Woori Card Scope 트러블슈팅 1 — Deferred Join으로 페이징 성능 잡기
 
-- 문제: `LIMIT ? OFFSET N` 방식의 페이징이 약 538만 건 데이터에서 뒤 페이지로 갈수록 급격히 느려졌습니다. OFFSET N은 앞의 N개 행을 실제로 읽고 버리기 때문에, 넓은(비대한) 행을 그만큼 스캔하는 비용이 큽니다.
-- 원인 분석: EXPLAIN으로 보니 인덱스가 없어 `ORDER BY SEQ`에서 정렬 비용과 넓은 행 스캔이 함께 발생했습니다.
-- 해결(Deferred Join): 페이지네이션은 커버링 인덱스로 PK(SEQ)만 먼저 추려낸 뒤, 그 PK로 본문을 조인해 가져오도록 바꿨습니다.
+- **문제**: 카드 거래 내역 테이블은 고객·분기별 소비 내역에 대·중·소분류 금액 컬럼만 50여 개인 **넓은 행 구조**입니다(538만 건). `LIMIT ? OFFSET N` 페이징이 뒤 페이지로 갈수록 급격히 느려졌고, 실측하니 **첫 페이지조차 14,526.6ms**가 걸렸습니다.
+- **원인 분석**: OFFSET N은 앞의 N개 행을 실제로 읽고 버리기 때문에, 넓은 행을 그만큼 스캔하는 비용이 큽니다. 더 근본적으로 EXPLAIN으로 확인하니 **테이블에 인덱스가 하나도 없었습니다.** 그래서 매번 538만 행을 전체 스캔하고 정렬하고 있었습니다.
+- **해결 (Deferred Join)**: 페이지네이션은 인덱스만으로 PK(SEQ)를 먼저 추려낸 뒤, 그 키로 본문을 조인해 가져오도록 바꿨습니다.
   - `... JOIN (SELECT SEQ FROM card_transaction ORDER BY SEQ LIMIT 20 OFFSET ?) tmp ON c.SEQ = tmp.SEQ`
-  - `CREATE INDEX idx_seq ON card_transaction (SEQ);`
-  - EXPLAIN ANALYZE로 실행 계획(index lookup, idx_seq 사용)을 검증했습니다.
-- 결과(측정):
-  - 중간 구간: 14,844.9ms → 1,857.9ms (약 87.48% 단축, 약 8배)
-  - 깊은 페이지(OFFSET 800,000): 38,890ms → 1,857.9ms (약 95.22% 단축, 약 20.9배)
-  - 첫 페이지(OFFSET 0): 14,527ms → 2.3ms (약 99.98% 단축)
-- 배운 점: OFFSET 페이징의 비용은 "읽고 버리는" 행에서 나오므로, 인덱스만 태워 키를 먼저 좁히는 Deferred Join으로 스캔량 자체를 줄이는 것이 핵심입니다.
+  - `CREATE INDEX idx_seq ON card_transaction (SEQ);` — 이 방식이 성립하려면 좁은(커버링) 인덱스가 필요합니다.
+  - 조건·정렬용 복합 인덱스(`idx_filter`)도 추가해봤는데 **EXPLAIN을 찍어보니 옵티마이저가 쓰지 않았습니다.** 커버링 인덱스로 20건만 채우면 빨리 끝나니(약 2,136), 조건에 맞는 46,738건을 전부 찾아 정렬 후 자르는 복합 인덱스보다 싸다고 판단한 것이었습니다. EXPLAIN ANALYZE로 index lookup과 `idx_seq` 사용을 확인했습니다.
+- **결과(실측)**:
+  - 중간 구간: 14,844.9ms → 1,857.9ms (약 **87.48% 단축**, 약 8배)
+  - 깊은 페이지(OFFSET 800,000): 38,890ms → 1,857.9ms (약 **95.22% 단축**, 약 20.9배)
+  - 첫 페이지(OFFSET 0): 14,527ms → 2.3ms (약 **99.98% 단축**, 약 6,313배)
+- **배운 점**: OFFSET 페이징의 비용은 "읽고 버리는" 행에서 나오므로, 인덱스만 태워 키를 먼저 좁히는 게 핵심입니다. 그리고 **인덱스는 만든다고 무조건 쓰이는 게 아니라는 것**, 실행 계획을 확인하고 그에 맞는 방식을 골라야 한다는 걸 배웠습니다. 다만 커버링 인덱스를 써도 OFFSET은 인덱스를 훑으므로 **깊은 페이지의 비용을 0으로 만들지는 못했습니다.**
 
-### Woori Card Scope 트러블슈팅 2 — InnoDB Cluster split-brain 방지와 Errant GTID 복구
+### Woori Card Scope 트러블슈팅 2 — split-brain 방지와 Errant GTID 복구
 
-- 문제: 단순 Master-Replica 구조는 네트워크 분단 시 양쪽이 각자 Master가 되는 split-brain 위험이 있습니다. 한쪽 Master가 사라지면 남은 Replica가 새 Master로 승격되어야 하는데, 분단이 풀리며 옛 Master가 살아나면 Master가 둘이 되어 데이터가 갈라집니다.
-- 해결(고가용성 구성):
-  - MySQL InnoDB Cluster(Single-Primary) + Group Replication을 사용해, 어느 순간에도 Primary는 하나만 존재하도록 했습니다(split-brain 방지).
-  - 과반(quorum = N/2 + 1) 기반 합의로 다수파만 쓰기를 유지하게 했습니다(N=4 → quorum 3).
-  - MySQL Router를 두어 6446(R/W)→Primary, 6447(R/O)→Secondary로 라우팅하고, WAS는 Router에만 연결했습니다. HikariCP는 write/read 풀을 분리해 read 부하를 Secondary로 보냈습니다.
-- Errant GTID 복구: 장애 노드를 다시 클러스터에 넣을 때, 그 노드에만 존재하는 Errant GTID(예: `...:1-18`) 때문에 재합류가 거부되는 문제가 있었습니다.
-  - `cluster.addInstance('root@mysql2:3306', { recoveryMethod: 'clone' })`로 clone 복구를 사용해, seed 노드의 데이터를 통째로 복제(Stage DROP DATA → FILE COPY / PAGE COPY, 약 80MB를 1초 내 전송)해 GTID를 정합하게 맞췄습니다.
-  - `docker kill mysql1` / `docker stop mysql2`로 강제 장애를 주입해 failover(R/W 승격)를 검증했습니다.
-- 배운 점: 고가용성은 "Primary가 하나임을 보장하는 합의"와 "장애 노드를 다시 안전하게 합류시키는 복구 절차"가 함께 있어야 완성됩니다.
+- **문제**: DB 한 대가 죽으면 서비스 전체가 멈추니 이중화가 필요합니다. 그런데 단순 Master-Replica(비동기 복제)는 네트워크 분단 시 위험합니다. Master가 죽어 Replica를 새 Master로 승격시킨 뒤, 분단이 풀리며 옛 Master가 살아나면 **Master가 둘이 되는 split-brain**이 생기고 양쪽에서 쓰기가 발생해 데이터 무결성이 깨집니다. 비동기 복제는 데이터를 따라 쓸 뿐 "누가 주인인지"를 시스템이 합의로 정해주지 않습니다.
+- **해결 (고가용성 구성)**:
+  - **MySQL InnoDB Cluster(Single-Primary) + Group Replication**을 총 4개 노드로 구성해, 어느 순간에도 Primary가 하나만 존재하도록 했습니다(split-brain 차단).
+  - 과반 합의(quorum = N/2 + 1)로 다수파만 쓰기를 유지합니다. N=4면 quorum은 3이라 **1노드 장애까지 자동 failover**됩니다. (노드 수는 홀수가 정석이고, 4개와 3개의 내구성이 같다는 것도 정리해뒀습니다.)
+  - 앞단에 **MySQL Router**를 두어 6446(R/W)→Primary, 6447(R/O)→Secondary로 라우팅하고, WAS는 Router에만 연결합니다. HikariCP는 write/read 풀을 분리해 조회 부하를 Secondary로 보냈습니다.
+- **Errant GTID 복구**: 클러스터를 구성하려고 seed(mysql1)에 나머지 노드를 `addInstance`로 추가했는데, mysql2·3·4에 각각 **Errant GTID**(예: `ade01245-...:1-18`)가 있어 표준 방식으로는 합류가 거부됐습니다.
+  - 근본 원인은 **클러스터 형성 전에 각 노드가 독립적으로 초기화된 설정 구조**였습니다. docker-compose가 init 스크립트를 4개 노드 전부에 마운트했고, 각 컨테이너가 기동 시점에 바이너리 로그를 켠 상태로 초기화 SQL을 각자 실행하면서, 같은 스키마여도 노드마다 다른 server_uuid 기반 GTID가 기록된 것입니다.
+  - `cluster.addInstance('root@mysql2:3306', { recoveryMethod: 'clone' })`로 **clone 복구**를 사용했습니다. clone은 합류 노드의 데이터와 GTID를 전부 버리고 seed의 물리 데이터를 통째로 복사합니다(Stage DROP DATA → FILE COPY / PAGE COPY, **80.64MB를 약 1초 내 전송**).
+  - binlog 복구도 검토했지만, 노드마다 이력이 이미 갈라진 상태에서는 로그 재생만으로 두 히스토리를 하나로 합칠 수 없다고 판단해 기각했습니다.
+- **결과(장애 주입 검증)**: `docker kill mysql1`(하드 크래시) → 자동 승격, **R/W 복구 22.15초**. `docker stop mysql2`(정상 종료) → **R/W 복구 21.91초**.
+- **배운 점**: 고가용성은 "Primary가 하나임을 보장하는 합의"와 "장애 노드를 다시 안전하게 합류시키는 복구 절차"가 함께 있어야 완성됩니다.
 
 ---
 
-## 자주 나올 수 있는 질문(FAQ) 힌트
+## 프로젝트 4: Hybrid RAG (PG-RAG, 토스페이먼츠 문서 검색)
 
-- "가장 자신 있는 프로젝트는?" → 한강페이. 결제 정합성(멱등성/상태 머신/복구)이라는 어려운 문제를 부하 테스트와 지표로 검증하며 해결했습니다.
-- "성능 최적화 경험은?" → Woori Card Scope의 Deferred Join(최대 약 6,313배까지 단축된 첫 페이지 사례 포함)과 한강페이 Rate Limit/커넥션 튜닝.
-- "비동기/동시성 경험은?" → SMU CLUB 이메일 @Async 처리(4.1배), 한강페이 Redis 분산락/멱등성/Token Bucket.
-- "DB 고가용성 경험은?" → Woori Card Scope의 InnoDB Cluster + Group Replication + MySQL Router, Errant GTID clone 복구.
-- 연락/링크 → GitHub: https://github.com/fluanceifi
+### Hybrid RAG 개요
+
+- 한 줄 소개: **토스페이먼츠 API 실문서를 대상으로 Elasticsearch 기반 RAG 검색 품질을 개선한 프로젝트**입니다.
+- 핵심은 **Lucene(BM25) + kNN(HNSW) + Weighted RRF** 조합을 운영 가능한 형태로 안정화한 것입니다.
+- GitHub: https://github.com/fluanceifi/hybrid-search-rag
+- 기술 스택: FastAPI, Elasticsearch(Lucene, Nori + synonym_graph 분석기), OpenAI Embedding(small/large), LangChain, Docker Compose.
+- 검증 데이터: 토스페이먼츠 실문서 + 골든셋 검증 질문 20개(`golden_queries_20.json`).
+- 특징: baseline을 **두 트랙으로 분리**해 "무엇 때문에 좋아졌는지"를 각각 독립적으로 검증했습니다. 수치를 하나의 선형 개선처럼 보이게 만들지 않으려고 일부러 나눠 적었습니다.
+
+### Hybrid RAG — 검색 구조
+
+- 온라인 질의 흐름: `사용자 질의 → FastAPI` → ① BM25 경로(Elasticsearch lexical) ② kNN 경로(OpenAI 임베딩 → ES semantic) → **Weighted RRF 병합(section_key 기준 dedup)** → Top-k 컨텍스트 + 질문을 OpenAI Chat에 전달 → 답변.
+- 오프라인 사전 구축: 문서 수집 → 섹션 분할 → 장문 청킹(chunk-size 700, overlap 120) → 임베딩 → ES 색인, lexical 쪽 analyzer/synonym 설정 적용.
+- Lexical: BM25 + `multi_match`(`title^4`, `title.raw_ko^2`, `content^1.2`, `content.raw_ko`) + `match_phrase(title)` boost.
+- Semantic: `dense_vector` kNN, HNSW 기반 ANN.
+
+### Hybrid RAG 트러블슈팅 1 — #fragment 중복 수집으로 문서 품질이 왜곡된 문제
+
+- **문제/원인**: API 문서의 각 섹션은 `reference#결제승인`처럼 fragment로 구분되는데, **HTTP 요청 시 fragment는 서버로 전달되지 않습니다.** 그래서 같은 페이지가 섹션 수만큼 반복 수집됐고, 동일 문서가 중복 색인되어 BM25 스코어와 kNN 유사도가 모두 왜곡됐습니다.
+- **해결**: ① 수집 단계에서 URL fragment를 제거한 뒤 중복 URL을 필터링해 같은 페이지를 한 번만 요청 ② 본문 내용을 해시화해 동일 청크는 색인 단계에서 제거 ③ 중복 제거 후 섹션 단위로 재분할하고 청킹을 재구성해 섹션 경계가 명확한 검색 단위를 확보.
+
+### Hybrid RAG 트러블슈팅 2 — RRF에서 같은 섹션 점수가 과누적된 문제 (핵심)
+
+- **문제**: 20개 섹션이 48개 청크로 쪼개진 상태에서 RRF를 돌리면, 같은 섹션의 청크들이 BM25·kNN 양쪽 리스트에 각각 등장해 **점수가 청크 수만큼 누적**됐습니다. 실제로는 순위가 낮은 섹션이 "청크가 많다"는 이유만으로 1등을 차지하는 왜곡이 생겼습니다.
+- **해결**: RRF 계산 **전에** BM25/kNN 각 리스트에서 `section_key` 기준으로 dedup 해(`es_store.py`의 `dedup_by_doc_key()`) 동일 섹션의 첫 청크만 남겼습니다. 병합 단위를 문서 의미 단위로 정규화한 것입니다. 중복 제거로 후보 수가 줄어드는 만큼 k=5에서 k=10으로 올렸습니다.
+- **결과**: 같은 7:3 가중치 조건에서 **Top-1 45% → 100%**로 회복했습니다.
+- **배운 점**: 하이브리드 검색에서 문제는 종종 모델이 아니라 **fusion 전 병합 단위**에 있습니다.
+
+### Hybrid RAG 트러블슈팅 3 — 가중치는 높을수록 좋은 게 아니었다
+
+- **관찰**: small 임베딩 모델 실험에서 BM25:kNN을 **85:15로 두면 Top-1 100%**였는데, **9:1로 더 올리자 95%로 후퇴**했습니다.
+- **해석**: 특정 신호를 과도하게 신뢰하면 질의 유형 다양성에 취약해집니다. 가중치는 절대값이 아니라 **도메인 질의 분포 기반 최적화 대상**입니다.
+- 참고로 kNN 단독(0:10)은 80%였습니다. 오답은 "결제 승인 ↔ 자동결제 승인", "Billing ↔ Payment"처럼 의미가 가까운 문서를 혼동하는 케이스였고, BM25 신호를 섞어 해결했습니다.
+
+### Hybrid RAG — 실험 결과 정리 (조건 명시)
+
+| 실험 단계 | 조건 | Top-1 | 해석 |
+|---|---|---|---|
+| BM25 Baseline | `match content` | 35.00% | BM25 초기 query 전략 baseline (dedup 이슈와 무관) |
+| BM25 Tuned | `multi_match` + title/content boost | 95.00% | 제목을 검색 범위에 넣고 가중치를 줘 lexical 정밀도 개선 |
+| Hybrid Baseline | large, 0.7:0.3, dedup **off** | 45.00% | 동일 섹션 중복 누적으로 RRF 왜곡 |
+| Hybrid Stabilized | large, 0.7:0.3, dedup **on** | 100.00% | `section_key` dedup으로 병합 단위 정상화 |
+| Small Model Tuned | small, 85:15, dedup on | 100.00% | **모델 교체 없이** 가중치 최적화만으로 100% |
+| Small Model Overweight | small, 0.9:0.1, dedup on | 95.00% | 과한 BM25 비중은 질의 다양성 대응력을 떨어뜨림 |
+| Large Model 7:3 | large, 0.7:0.3, dedup on | 100.00% | semantic 신호 품질이 올라가면 7:3에서도 안정적 |
+
+- 혼선 방지를 위해 꼭 붙이는 문장: **35%는 BM25 초기 query 전략 baseline이며 dedup 이슈와 무관합니다. dedup 영향은 Hybrid RRF 병합 단계에서 발생했고, 7:3 기준 45% → 100% 구간으로 따로 관리합니다.**
+- 근거 리포트: `bm25_eval_report.md`, `hybrid_eval_b0.7_k0.3_rc20_kc10.md`, `hybrid_eval_report_7_3_dedup.md`, `hybrid_eval_report_9_1_dedup.md`, `eval_summary_small_model.md`, `eval_report_small_85_15.md`, `hybrid_eval_report_7_3_large.md`
+
+---
+
+## 프로젝트 5: 이 포트폴리오 사이트 자체 (resume-frontend)
+
+- 지금 대화하고 있는 이 챗봇도 제가 만든 것입니다. 포트폴리오 PDF 뷰어 + **RAG 챗봇**으로 되어 있고, 답변은 **SSE 스트리밍**으로 한 글자씩 나옵니다.
+- 구조: 정적 프론트(Vite + React) → `POST /api/chat`(Vercel Edge Function) → ① 질의 임베딩(`text-embedding-3-small`) ② 사전 생성한 임베딩(`api/_data/embeddings.json`)과 코사인 유사도로 top-5 검색 ③ 프롬프트 구성 후 OpenAI 챗 스트리밍 ④ OpenAI SSE를 자체 SSE로 중계.
+- 임베딩은 질의마다 다시 만들지 않고 **배포 전 1회 사전 생성**해 커밋합니다. 지식베이스(`knowledge.md`)를 고치면 `npm run embeddings`로 다시 만듭니다.
+- 504 게이트웨이 타임아웃을 피하려고, 무거운 작업을 응답 전에 await 하지 않고 **스트림 Response를 즉시 반환한 뒤 스트림 안에서** 임베딩·검색·챗을 처리하도록 바꿨습니다. 연결 유지용으로 먼저 한 바이트를 흘려보냅니다.
+- 처음에는 이 사이트를 **Docker 멀티스테이지 빌드 + Nginx**로 만들어 GitHub Actions에서 GHCR에 이미지를 푸시하고, 별도 인프라 레포(`resume-infra`)로 repository_dispatch를 보내 배포하는 구조로 운영했습니다. 빌드 성공/실패는 Discord Webhook으로 알림을 받았습니다. 이후 운영 부담을 줄이려고 Vercel 서버리스 구조로 재편했습니다.
+- 이런 이야기를 하는 이유는, **제가 만든 서비스는 배포와 운영까지 직접 굴려봤다**는 걸 보여드리고 싶어서입니다.
+
+---
+
+## 자주 묻는 질문 (FAQ)
+
+- **"가장 자신 있는 프로젝트는?"** → 한강페이입니다. 결제 정합성(멱등성·상태 머신·복구)이라는 어려운 문제를 부하 테스트와 지표로 검증하며 풀었고, "알 수 없음" 상태를 다룬 설계로 좋은 평가를 받았습니다.
+- **"성능 최적화 경험은?"** → Woori Card Scope의 Deferred Join(첫 페이지 14,527ms → 2.3ms, 약 6,313배)과 한강페이의 Rate Limit·커넥션 튜닝, SMU CLUB의 메일 비동기 처리(약 4.1배)가 있습니다.
+- **"비동기/동시성 경험은?"** → SMU CLUB 이메일 `@Async` + ThreadPoolTaskExecutor, 한강페이의 Redis 분산 락(SET NX + Lua CAD)·멱등성·Token Bucket/Sliding Window, 은행 쪽 DB 비관적 락과 락 순서 고정입니다.
+- **"DB 고가용성 경험은?"** → Woori Card Scope의 InnoDB Cluster + Group Replication + MySQL Router, Errant GTID clone 복구, failover 실측(22.15초 / 21.91초)입니다.
+- **"AI나 RAG도 해봤나요?"** → Hybrid RAG 프로젝트에서 BM25 + kNN + Weighted RRF를 튜닝해 Top-1 정확도를 35% → 95%(BM25 트랙), 45% → 100%(하이브리드 트랙)로 올렸습니다. 지금 이 챗봇도 직접 만든 RAG입니다.
+- **"실패한 경험이 있나요?"** → 많습니다. 결제 복구를 넣었다가 무한 재시도로 서버를 죽였고, 분산 락을 실행에만 걸어 중복 생성을 못 막았고, 인덱스를 추가했는데 옵티마이저가 안 써서 EXPLAIN을 다시 봤습니다. 포트폴리오에 그 과정을 같이 적어둔 이유입니다.
+- **"팀에서 어떤 역할을 하나요?"** → 한강페이에서는 TL 겸 백엔드·QA를 맡았습니다. 응답 포맷 표준화나 커밋 컨벤션처럼, 팀이 덜 헤매게 만드는 일을 챙기는 편입니다.
+- **"연락은 어떻게 하나요?"** → 이메일 gksrnr66@gmail.com, GitHub https://github.com/fluanceifi , LinkedIn https://www.linkedin.com/in/sjy-511661289/ 로 연락 주시면 됩니다.
