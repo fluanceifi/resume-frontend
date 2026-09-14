@@ -31,7 +31,7 @@
 | `src/hooks/useChatStream.ts` | SSE를 읽어 토큰을 라이브로 append |
 | `src/components/ChatWidget.tsx` | 플로팅 버튼 + 챗 패널 |
 | `src/App.tsx` | PDF 뷰어 + 위젯 |
-| `public/portfolio.pdf` | 정적 서빙되는 포트폴리오 PDF |
+| `src/assets/portfolio*.pdf` | 포트폴리오 PDF. 파일명(날짜) 최신본을 빌드 시 자동 선택(`App.tsx`의 `import.meta.glob`), Vite 해시 URL로 캐시 무효화 |
 
 ## 지식베이스 갱신
 
