@@ -94,3 +94,8 @@ vercel --prod
 |---|---|---|
 | `OPENAI_API_KEY` | Vercel 서버 | 임베딩 + 챗. 클라이언트에 노출 안 됨 |
 | `VITE_CHAT_ENDPOINT` | 빌드타임(선택) | 프론트/API 분리 배포 시에만 API 절대 URL 지정 |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Vercel 서버(선택) | RAG 질문 로깅용 Upstash Redis(Vercel KV) REST 접속. `UPSTASH_REDIS_REST_URL`/`_TOKEN`도 인식. **없으면 로깅만 건너뛰고 챗은 정상 동작** |
+
+### RAG 질문 로깅
+
+`api/chat.ts`는 각 질문을 Upstash Redis 리스트 `rag:queries`에 append 한다(`{ts, query, topIds, scores}`, 최근 2000건 유지). 챗 응답을 막지 않도록 `waitUntil` 기반 fire-and-forget이며, 위 KV 환경변수가 없으면 조용히 스킵한다. 조회 예: Upstash 콘솔 또는 `LRANGE rag:queries -20 -1`.

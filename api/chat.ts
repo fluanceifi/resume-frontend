@@ -10,6 +10,9 @@ const CHAT_MODEL = 'gpt-4o-mini'
 const TOP_K = 5
 const EMBED_TIMEOUT_MS = 12000
 const CHAT_TIMEOUT_MS = 30000
+const LOG_KEY = 'rag:queries' // Upstash Redis 리스트 키
+const LOG_MAX = 2000 // 최근 N건만 보관(LTRIM)
+const LOG_TIMEOUT_MS = 3000
 
 type Rec = { id: number; text: string; embedding: number[] }
 const RECORDS = (kb as { records: Rec[] }).records
@@ -47,12 +50,33 @@ async function embedQuery(query: string, apiKey: string): Promise<number[]> {
   return json.data[0].embedding
 }
 
-function retrieve(queryVec: number[]): Rec[] {
+function retrieve(queryVec: number[]): { r: Rec; score: number }[] {
   return RECORDS
     .map(r => ({ r, score: cosine(queryVec, r.embedding) }))
     .sort((a, b) => b.score - a.score)
     .slice(0, TOP_K)
-    .map(x => x.r)
+}
+
+// RAG 질문 기록을 Upstash Redis(Vercel KV) 리스트에 append 한다.
+// - Edge 런타임이라 REST API(fetch)로만 접근한다.
+// - 스토리지 env가 없으면 조용히 스킵해 챗 동작을 막지 않는다(로깅은 부가 기능).
+// - RPUSH 후 LTRIM으로 최근 LOG_MAX건만 유지한다.
+type RagLog = { ts: string; query: string; topIds: number[]; scores: number[] }
+
+async function logQuery(entry: RagLog): Promise<void> {
+  const env = (globalThis as { process?: { env?: Record<string, string> } }).process?.env ?? {}
+  const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL
+  const token = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN
+  if (!url || !token) return
+  const value = JSON.stringify(entry)
+  await fetchWithTimeout(`${url}/pipeline`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify([
+      ['RPUSH', LOG_KEY, value],
+      ['LTRIM', LOG_KEY, String(-LOG_MAX), '-1'],
+    ]),
+  }, LOG_TIMEOUT_MS)
 }
 
 function buildMessages(query: string, contexts: Rec[]) {
@@ -75,7 +99,9 @@ function buildMessages(query: string, contexts: Rec[]) {
   ]
 }
 
-export default async function handler(req: Request): Promise<Response> {
+type EdgeContext = { waitUntil?: (p: Promise<unknown>) => void }
+
+export default async function handler(req: Request, ctx?: EdgeContext): Promise<Response> {
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS })
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405, headers: CORS })
 
@@ -100,7 +126,18 @@ export default async function handler(req: Request): Promise<Response> {
         if (!query) { send({ error: '질문을 입력해주세요.' }); return finish() }
 
         const qvec = await embedQuery(query, apiKey)
-        const contexts = retrieve(qvec)
+        const hits = retrieve(qvec)
+        const contexts = hits.map(h => h.r)
+
+        // RAG 질문 기록(부가 기능): 응답을 막지 않도록 fire-and-forget.
+        // waitUntil이 있으면 응답 후에도 write가 끝나도록 맡기고, 실패는 삼킨다.
+        const logging = logQuery({
+          ts: new Date().toISOString(),
+          query,
+          topIds: hits.map(h => h.r.id),
+          scores: hits.map(h => Math.round(h.score * 1000) / 1000),
+        }).catch(() => { /* 로깅 실패는 챗에 영향 주지 않음 */ })
+        if (ctx?.waitUntil) ctx.waitUntil(logging)
 
         const upstream = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
