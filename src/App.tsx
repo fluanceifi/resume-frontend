@@ -1,8 +1,8 @@
 import ChatWidget from './components/ChatWidget'
 
-// src/assets/의 portfolio*.pdf 중 파일명(날짜) 최신본을 빌드 시 자동 선택한다.
-// 새 PDF는 src/assets/portfolioYYMMDD.pdf 로 추가만 하면 코드 수정 없이 반영되고,
-// Vite 해시 URL이라 브라우저 캐시도 자동으로 무효화된다.
+// src/assets/의 portfolio*.pdf 중 파일명(날짜·시각) 최신본을 빌드 시 자동 선택한다.
+// 새 PDF는 src/assets/portfolioYYMMDD[HHMM].pdf 로 추가만 하면 코드 수정 없이 반영되고,
+// Vite 해시 URL이라 브라우저 캐시도 자동으로 무효화된다. (구버전은 지워 한 개만 남긴다)
 const pdfUrls = import.meta.glob('./assets/portfolio*.pdf', {
   eager: true,
   query: '?url',
