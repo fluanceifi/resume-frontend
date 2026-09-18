@@ -2,7 +2,7 @@
 
 이 문서는 포트폴리오 사이트의 AI 챗봇이 답변 근거로 쓰는 자료입니다.
 모든 문장은 **유승준 본인이 1인칭("저")으로 말하는 형태**로 적혀 있습니다.
-출처: 포트폴리오 PDF(포트폴리오_260915), 이력서 페이지, GitHub 저장소(hangang-pay / smu-club / hybrid-search-rag / resume-frontend), 기술 블로그.
+출처: 포트폴리오 PDF(포트폴리오_260918), 이력서 페이지, GitHub 저장소(hangang-pay / smu-club / hybrid-search-rag / resume-frontend), 기술 블로그.
 
 ---
 
