@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import ChatWidget from './components/ChatWidget'
 
 // src/assets/의 portfolio*.pdf 중 파일명(날짜·시각) 최신본을 빌드 시 자동 선택한다.
@@ -36,6 +37,7 @@ export default function App() {
       </main>
 
       <ChatWidget />
+      <Analytics />
     </div>
   )
 }
